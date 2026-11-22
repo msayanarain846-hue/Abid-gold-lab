@@ -4,9 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Abid Gold Lab</title>
 <style>
-:root{--bg:#f6f1e4;--cd:#fffdf7;--tx:#2b2415;--mu:#85795e;--bd:#e6dcc0;--ac:#b8860b;--ac2:#8a6508;--er:#c62828;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14110a;--cd:#201b0f;--tx:#f3ebd5;--mu:#a99d80;--bd:#3a3220;--ac:#e2b73e;--ac2:#f0cd6a;--er:#ef5350}}
-:root[data-theme="dark"]{--bg:#14110a;--cd:#201b0f;--tx:#f3ebd5;--mu:#a99d80;--bd:#3a3220;--ac:#e2b73e;--ac2:#f0cd6a;--er:#ef5350}
+:root{--bg:#fbf4df;--cd:#fffdf5;--tx:#2e2208;--mu:#8a7240;--bd:#ead9a4;--ac:#a97709;--ac2:#e3b233;--er:#b3261e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding-bottom:90px}
 header{display:flex;align-items:center;gap:12px;padding:16px;max-width:640px;margin:0 auto}
@@ -37,6 +35,14 @@ nav button.on{color:var(--ac);font-weight:700}
 #rc{display:none}.tb{width:100%;border-collapse:collapse;background:var(--cd);border:1px solid var(--bd);border-radius:12px;margin-bottom:12px;font-size:.9rem}.tb th{color:var(--mu);font-weight:500;font-size:.75rem;padding:8px 4px}.tb td{padding:9px 4px;border-top:1px solid var(--bd);text-align:center}.tb td:first-child{text-align:left;padding-left:10px;color:var(--mu)}.tb tr.k td{font-weight:700;color:var(--tx)}
 @media print{@page{margin:0}body *{visibility:hidden}#rc,#rc *{visibility:visible}#rc{display:block;position:absolute;left:0;top:0;color:#000;background:#fff;font:12px monospace;padding:4px 6px}#rc hr{border:0;border-top:1px dashed #000}#rc td{padding:1px 0}}
 #gate{position:fixed;inset:0;z-index:50;background:var(--bg);display:none;align-items:center;justify-content:center;padding:20px}#gate .bx{width:100%;max-width:380px}
+header{max-width:none;margin:0 0 16px;padding:18px 18px 22px;background:linear-gradient(135deg,#5c3d04,#b8860b 60%,#e6b832);color:#fff;border-radius:0 0 24px 24px;box-shadow:0 6px 18px rgba(120,80,0,.25)}
+header h1{color:#fff;font-size:1.35rem;letter-spacing:.5px}header small{color:#ffe9a6}header img{background:#fff;padding:3px;border-radius:10px}
+.st{border-left:5px solid var(--ac2);box-shadow:0 2px 8px rgba(120,80,0,.08)}.n{background:linear-gradient(135deg,#b8860b,#e6b832)}
+.btn{background:linear-gradient(135deg,#9a6b08,#d4a017);box-shadow:0 3px 10px rgba(150,100,0,.3)}
+.hero{background:linear-gradient(135deg,#4a3003,#a67608 55%,#e6b832);box-shadow:0 6px 16px rgba(120,80,0,.3)}
+.rs,.tb{box-shadow:0 2px 8px rgba(120,80,0,.08)}.tb th{background:#f3e6b8;color:#5c3d04}
+.ch button.on{background:linear-gradient(135deg,#9a6b08,#d4a017);border-color:#b8860b}
+nav{background:#2e2208;border-top:0}nav button{color:#cdb67a}nav button.on{color:#ffd45c}
 </style></head><body>
 <header><img id="hl" alt="" style="display:none"><div><h1 id="hn">Gold Lab</h1><small id="hs"></small></div></header>
 <main>
@@ -62,7 +68,7 @@ nav button.on{color:var(--ac);font-weight:700}
 <div class="f"><label>Logo (image)</label><input id="s-logo" type="file" accept="image/*"><button class="btn" id="s-lx" style="margin-top:6px;background:var(--mu)">Remove logo</button></div>
 <div class="f"><label>Slip footer text</label><input id="s-foot"></div>
 <div class="g2"><div class="f"><label>Slip width</label><select id="s-pw"><option>58mm</option><option>80mm</option></select></div>
-<div class="f"><label>Default rate per tola (Rs)</label><input id="s-rate" type="number"></div></div>
+<div class="f"><label>Default rate per tola (Rs)</label><input id="s-rate" type="number"></div></div><div class="f"><label>Print method</label><select id="s-pm"><option value="bt">Direct Bluetooth (BLE printer)</option><option value="rawbt">RawBT app (classic Bluetooth)</option><option value="browser">Browser print dialog</option></select></div>
 <div class="g2"><div class="f"><label>Water temperature</label><select id="s-tm"><option value="off">Ignore (1.000)</option><option value="on">Use correction</option></select></div>
 <div class="f"><label>Temperature (°C)</label><input id="s-t" type="number" step="0.5"></div></div>
 <button class="btn" id="lo-btn" style="background:var(--mu);margin-bottom:12px;display:none">Log out</button>
@@ -76,6 +82,8 @@ nav button.on{color:var(--ac);font-weight:700}
 </section>
 </main>
 <div id="rc"></div>
+<div id="ts" style="position:fixed;left:12px;right:12px;bottom:84px;z-index:60;background:#2e2208;color:#fff;padding:10px 14px;border-radius:12px;display:none"></div>
+<div id="md" style="display:none;position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.55);overflow:auto;padding:14px"><div style="max-width:440px;margin:0 auto;background:var(--cd);border-radius:16px;padding:14px"><img id="md-i" alt="" style="width:100%;border:1px solid var(--bd);border-radius:8px;background:#fff"><p class="nt" id="md-n"></p><div class="f" style="margin-top:10px"><label>Customer name</label><input id="md-c"></div><div class="g2"><button class="btn" id="md-s">Save name</button><button class="btn" id="md-p">Print again</button><button class="btn" id="md-o" style="background:var(--mu)">Open in Lab</button><button class="btn" id="md-d" style="background:var(--er)">Delete</button></div><button class="btn" id="md-x" style="background:none;color:var(--mu);box-shadow:none">Close</button></div></div>
 <div id="gate"><div class="bx"><h1 style="color:var(--ac);text-align:center">Gold Lab</h1><div class="f"><label>Username</label><input id="g-u" autocomplete="username"></div><div class="f"><label>Password</label><input id="g-p" type="password" autocomplete="current-password"></div><div class="f" id="g-cw" style="display:none"><label>Invite code</label><input id="g-code"></div><button class="btn" id="g-go">Log in</button><p class="nt" id="g-m"></p><p class="nt" id="g-sw" style="text-align:center;cursor:pointer;color:var(--ac)">Have an invite? Register</p></div></div>
 <nav><button class="on" data-p="lab">Lab</button><button data-p="kaat">Kaat</button><button data-p="rec">Records</button><button data-p="set">Settings</button></nav>
 <script>
@@ -83,7 +91,7 @@ var $=function(i){return document.getElementById(i)},RG=19.32,TG=11.664;
 var WT=[[10,.9997],[15,.9991],[20,.99821],[25,.99705],[30,.99565],[35,.99403],[40,.99222]];
 // ===== PUT YOUR SERVER URL HERE (example: https://goldlab-api.onrender.com). Leave empty for offline mode. =====
 var SERVER="";
-var D={shop:"Gold Lab",addr:"",ph:"",logo:"",foot:"Estimate only (density method)",pw:"80mm",rate:"",tm:"off",t:30,rs:10.49,rc:8.96,st:8.96,ps:10.09,mx:9.98,s1:8.96,s2:9.66,l1:9.98,fg:8.5},S={},tok=0,al="st";
+var D={shop:"Gold Lab",addr:"",ph:"",logo:"",foot:"Estimate only (density method)",pw:"80mm",rate:"",tm:"off",t:30,rs:10.49,rc:8.96,st:8.96,ps:10.09,mx:9.98,s1:8.96,s2:9.66,l1:9.98,fg:8.5,pm:"bt"},S={},tok=0,al="st";
 try{S=JSON.parse(localStorage.getItem("gl_s")||"{}");tok=+localStorage.getItem("gl_k")||0}catch(e){}
 for(var k in D)if(S[k]===undefined)S[k]=D[k];
 var AL={st:"Standard",rs:"Silver",rc:"Copper",ps:"P_Silver",mx:"Mix540",s1:"Standard 1",s2:"Standard 2",l1:"Local 1",fg:"False Gold"};
@@ -92,73 +100,790 @@ function tarN(g){var r=Math.round(g/TG*96*100)/100,t=Math.floor(r/96);r-=t*96;va
 function tar(g){var q=tarN(g);return q[0]+"T "+q[1]+"A "+q[2]+"R"}
 function fm(n){return"Rs "+Math.round(n).toLocaleString("en-PK")}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
-function head(){$("hn").textContent=S.shop||"Gold Lab";$("hs").textContent=[S.addr,S.ph].filter(Boolean).join(" · ");var l=$("hl");l.style.display=S.logo?"block":"none";l.src=S.logo||""}
+function head(){$("hn").textContent=S.shop||"Gold Lab";$("hs").textContent=[S.addr,S.ph].filter(Boolean).join(" · ");var l=$("hl");l.style.display=S.logo?"block":"none";l.src=S.logo||"";LOGO=null;if(S.logo){LOGO=new Image();LOGO.src=S.logo}}
 function show(el,rows,hero,title,cu){
 var h=hero?'<div class="hero"><b>'+hero[0]+'</b><span>'+hero[1]+'</span></div>':"";
 el.innerHTML=h+'<div class="rs">'+rows.map(function(r){return"<div><span>"+r[0]+"</span><b>"+r[1]+"</b></div>"}).join("")+'</div><button class="btn" id="pb">Print Slip</button>';
 $("pb").onclick=function(){slip(title,rows,cu?cu.value:"")}}
-function slip(title,rows,cu,body,rec){tok++;if(rec)saveRec(rec,cu);try{localStorage.setItem("gl_k",tok)}catch(e){}$("s-tok").value=tok+1;
-var rc=$("rc");rc.style.width=S.pw;var d=new Date();
-rc.innerHTML='<div style="text-align:center">'+(S.logo?'<img src="'+S.logo+'" style="max-width:55%;max-height:60px"><br>':"")+'<b style="font-size:15px">'+esc(S.shop)+'</b><br>'+esc(S.addr)+(S.addr?"<br>":"")+esc(S.ph)+'<br><b>'+title+'</b></div><table style="width:100%"><tr><td>#'+tok+'</td><td style="text-align:right">'+d.toLocaleDateString("en-GB")+" "+d.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"})+'</td></tr>'+(cu?'<tr><td colspan="2">Customer: '+esc(cu)+'</td></tr>':"")+'</table><hr>'+(body||'<table style="width:100%">'+rows.map(function(r){return'<tr><td>'+r[0]+'</td><td style="text-align:right">'+r[1].replace(/<[^>]*>/g," ")+'</td></tr>'}).join("")+'</table>')+'<hr><div style="text-align:center">'+esc(S.foot)+'</div>';
-window.print()}
+var LOGO=null,BT=null,tt=0;
+function toast(t){var e=$("ts");e.textContent=t;e.style.display="block";clearTimeout(tt);tt=setTimeout(function(){e.style.display="none"},5000)}
+function drawSlip(d){var W=S.pw==="58mm"?384:576,k=W/384,c=document.createElement("canvas");c.width=W;c.height=Math.round(2000*k);var x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,W,c.height);x.fillStyle=x.strokeStyle="#000";x.textBaseline="middle";
+var m=12*k,iw=W-2*m,y=m+4*k,i;
+function T(t,px,xx,yy,al,b,mw){x.font=(b?"bold ":"")+px*k+"px sans-serif";x.textAlign=al;x.fillText(t,xx,yy,mw)}
+function B(y1,h,w){x.lineWidth=(w||2)*k;x.strokeRect(m,y1,iw,h)}
+if(LOGO&&LOGO.complete&&LOGO.naturalWidth){var lh=54*k,lw=LOGO.naturalWidth*lh/LOGO.naturalHeight;if(lw>iw*.6){lw=iw*.6;lh=lw*LOGO.naturalHeight/LOGO.naturalWidth}x.drawImage(LOGO,(W-lw)/2,y,lw,lh);y+=lh+4*k}
+y+=14*k;T(d.shop||"",26,W/2,y,"center",1,iw);y+=24*k;
+if(d.addr){T(d.addr,15,W/2,y,"center",0,iw);y+=19*k}
+if(d.ph){T(d.ph,15,W/2,y,"center",1,iw);y+=19*k}
+y+=6*k;x.fillRect(m,y,iw,30*k);x.fillStyle="#fff";T(d.title,19,W/2,y+16*k,"center",1);x.fillStyle="#000";y+=30*k;
+B(y,28*k);x.beginPath();x.moveTo(W*.38,y);x.lineTo(W*.38,y+28*k);x.stroke();
+T("#"+d.tok,17,(m+W*.38)/2,y+15*k,"center",1);T(d.date,14,(W*.38+W-m)/2,y+15*k,"center",0,W*.62-m-8*k);y+=28*k;
+if(d.cust){B(y,28*k);T("Customer: "+d.cust,16,m+6*k,y+15*k,"left",1,iw-12*k);y+=28*k}
+y+=10*k;
+if(d.big){B(y,66*k,4);B(y+5*k,56*k,1.5);T(d.big[0],14,W/2,y+17*k,"center",0);T(d.big[1],34,W/2,y+43*k,"center",1,iw-20*k);y+=66*k;if(d.sub){T(d.sub,14,W/2,y+14*k,"center",0,iw);y+=26*k}y+=8*k}
+if(d.cols){var fr=[.3,.14,.15,.15,.26],xs=[m],rh=28*k;fr.forEach(function(f,n){xs.push(xs[n]+f*iw)});
+var row=function(r,hd,bd){if(hd){x.fillRect(m,y,iw,rh);x.fillStyle="#fff"}r.forEach(function(v,n){var cx=xs[n],cw=xs[n+1]-cx;T(String(v),n?15:13,n?cx+cw/2:cx+4*k,y+rh/2,n?"center":"left",hd||bd||!n,cw-6*k)});x.fillStyle="#000";x.lineWidth=1.5*k;for(i=0;i<5;i++)x.strokeRect(xs[i],y,xs[i+1]-xs[i],rh);y+=rh};
+row(d.cols,1);d.rows.forEach(function(r,n){row(r,0,n===d.rows.length-1)});y+=10*k}
+d.kv.forEach(function(r){var h=30*k;if(r[2]){x.fillRect(m,y,iw,h);x.fillStyle="#fff"}T(r[0],15,m+6*k,y+h/2,"left",1,iw*.5-10*k);T(String(r[1]),16,m+iw*.75,y+h/2,"center",1,iw*.5-8*k);x.fillStyle="#000";B(y,h,1.5);x.beginPath();x.moveTo(m+iw*.5,y);x.lineTo(m+iw*.5,y+h);x.stroke();y+=h});
+y+=12*k;x.setLineDash([8*k,5*k]);x.lineWidth=2*k;x.beginPath();x.moveTo(m,y);x.lineTo(W-m,y);x.stroke();x.setLineDash([]);y+=18*k;T(d.foot||"",13,W/2,y,"center",0,iw);y+=20*k;T("* Thank you *",15,W/2,y,"center",1);y+=26*k;
+var o=document.createElement("canvas");o.width=W;o.height=Math.round(y+8*k);var q=o.getContext("2d");q.fillStyle="#fff";q.fillRect(0,0,W,o.height);q.drawImage(c,0,0);q.strokeStyle="#000";q.lineWidth=3*k;q.strokeRect(2*k,2*k,W-4*k,o.height-4*k);q.lineWidth=k;q.strokeRect(5.5*k,5.5*k,W-11*k,o.height-11*k);return o}
+function rasterize(c){var w=c.width,h=c.height,p=c.getContext("2d").getImageData(0,0,w,h).data,bw=w/8,o=[27,64];
+for(var y0=0;y0<h;y0+=96){var hh=Math.min(96,h-y0);o.push(29,118,48,0,bw&255,bw>>8,hh&255,hh>>8);for(var y=y0;y<y0+hh;y++)for(var b=0;b<bw;b++){var v=0;for(var i=0;i<8;i++){var j=(y*w+b*8+i)*4;if(p[j]*.3+p[j+1]*.59+p[j+2]*.11<140)v|=128>>i}o.push(v)}}
+o.push(27,100,4);return new Uint8Array(o)}
+var SV=["000018f0-0000-1000-8000-00805f9b34fb","0000ff00-0000-1000-8000-00805f9b34fb","0000ffe0-0000-1000-8000-00805f9b34fb","0000fff0-0000-1000-8000-00805f9b34fb","e7810a71-73ae-499d-8c15-faa9aef0c3f2","49535343-fe7d-4ae5-8fa9-9fafd205e455"];
+async function btCh(){if(BT&&BT.dev.gatt.connected)return BT.ch;var dev=BT?BT.dev:await navigator.bluetooth.requestDevice({acceptAllDevices:true,optionalServices:SV}),srv=await dev.gatt.connect(),ss=await srv.getPrimaryServices(),ch=null;
+for(var s of ss){var cs=await s.getCharacteristics();for(var c of cs)if(c.properties.writeWithoutResponse||c.properties.write){ch=c;break}if(ch)break}
+if(!ch)throw new Error("printer has no BLE write channel");BT={dev:dev,ch:ch};return ch}
+async function btSend(b){var ch=await btCh(),n=180,i=0,f=ch.properties.writeWithoutResponse?"writeValueWithoutResponse":"writeValue";
+while(i<b.length){try{await ch[f](b.slice(i,i+n));i+=n;await new Promise(function(r){setTimeout(r,12)})}catch(e){if(n>100)n=100;else if(n>20)n=20;else throw e}}}
+async function out(d){var c=drawSlip(d);
+if(S.pm==="bt"&&navigator.bluetooth){try{toast("Printing...");await btSend(rasterize(c));toast("Printed.");return}catch(e){toast("Bluetooth print failed ("+(e.message||e)+"). Using normal print.")}}
+if(S.pm==="rawbt"){var u=rasterize(c),s="";for(var i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));location.href="rawbt:base64,"+btoa(s);return}
+$("rc").innerHTML='<img style="width:100%" src="'+c.toDataURL("image/png")+'">';setTimeout(function(){window.print()},200)}
+function slip(d,rec){tok++;try{localStorage.setItem("gl_k",tok)}catch(e){}$("s-tok").value=tok+1;var n=new Date();d.tok=tok;d.date=n.toLocaleDateString("en-GB")+" "+n.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});d.shop=S.shop;d.addr=S.addr;d.ph=S.ph;d.foot=S.foot;if(rec){rec.slip=d;saveRec(rec,d.cust)}out(d)}
 var REC=[];try{REC=JSON.parse(localStorage.getItem("gl_rec")||"[]")}catch(e){}
 function persist(){try{localStorage.setItem("gl_rec",JSON.stringify(REC.slice(0,3000)))}catch(e){}}
 function api(){return SERVER.replace(/\/$/,"")+"/records"}
-function post(r){if(!SERVER||!JWT)return Promise.resolve(false);var c=Object.assign({},r);delete c.sent;return fetch(api(),{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+JWT},body:JSON.stringify(c)}).then(function(x){if(x.status===401)logout();return x.ok}).catch(function(){return false})}
+function post(r){if(!SERVER||!JWT)return Promise.resolve(false);var c=Object.assign({},r);delete c.sent;delete c.slip;return fetch(api(),{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+JWT},body:JSON.stringify(c)}).then(function(x){if(x.status===401)logout();return x.ok}).catch(function(){return false})}
 function saveRec(rec,cu){rec.token=tok;rec.customer=cu||"";rec.shop=S.shop;rec.date=new Date().toISOString();rec.sent=false;REC.unshift(rec);persist();drawRec();post(rec).then(function(ok){if(ok){rec.sent=true;persist();drawRec()}})}
-function drawRec(){var q=($("r-q").value||"").toLowerCase(),a=REC.filter(function(r){return!q||(r.customer||"").toLowerCase().indexOf(q)>-1});
-$("r-l").innerHTML=a.length?a.slice(0,100).map(function(r){return'<div class="rs"><div><span>#'+r.token+" "+esc(r.customer||"-")+"</span><b>"+(r.sent?"":"⏳ ")+fm(r.type==="lab"?r.balance:r.amount||0)+"</b></div><div><span>"+new Date(r.date).toLocaleString("en-GB")+" · "+(r.type==="lab"?r.kaatType:"Kaat")+"</span><b>"+(r.ratti!==undefined?r.ratti.toFixed(2)+" R":"")+"</b></div></div>"}).join(""):'<p class="nt">No records yet. Records are saved when you press Print Slip.</p>'}
-$("r-sync").onclick=async function(){var m=$("r-msg");if(!SERVER||!JWT){m.textContent="Log in first.";return}m.textContent="Syncing...";
-try{for(var i=0;i<REC.length;i++)if(!REC[i].sent&&await post(REC[i]))REC[i].sent=true;
-var x=await fetch(api(),{headers:{Authorization:"Bearer "+JWT}});if(x.status===401){logout();return}if(!x.ok)throw 0;var L=await x.json();
-L.forEach(function(o){if(!REC.some(function(r){return r.token===o.token&&r.date===o.date}))REC.push(Object.assign(o,{sent:true}))});
-REC.sort(function(a,b){return a.date<b.date?1:-1});persist();m.textContent="Synced."}catch(e){m.textContent="Server not reachable. Check the URL and key."}drawRec()};
-var JWT="",gm="login";try{JWT=localStorage.getItem("gl_jwt")||""}catch(e){}
-function mode(m){gm=m;$("g-cw").style.display=m==="reg"?"block":"none";$("g-go").textContent=m==="reg"?"Register":"Log in";$("g-sw").textContent=m==="reg"?"Already registered? Log in":"Have an invite? Register";$("g-m").textContent=""}
-function gate(){$("lo-btn").style.display=SERVER?"block":"none";$("r-sync").style.display=SERVER?"block":"none";var g=$("gate");if(!SERVER||JWT){g.style.display="none";return}g.style.display="flex";var m=location.hash.match(/^#join-([A-Za-z0-9]+)$/);if(m){$("g-code").value=m[1];mode("reg")}}
-function logout(){JWT="";try{localStorage.removeItem("gl_jwt")}catch(e){}gate()}
-$("lo-btn").onclick=logout;$("g-sw").onclick=function(){mode(gm==="reg"?"login":"reg")};
-$("g-go").onclick=async function(){var u=$("g-u").value.trim(),m=$("g-m");m.textContent="Please wait...";
-try{var x=await fetch(SERVER.replace(/\/$/,"")+(gm==="reg"?"/register":"/login"),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:u,password:$("g-p").value,code:$("g-code").value.trim()})});var d=await x.json().catch(function(){return{}});
-if(!x.ok){m.textContent=d.error||"Failed.";return}
-JWT=d.token;var last="";try{last=localStorage.getItem("gl_user")||"";localStorage.setItem("gl_jwt",JWT);localStorage.setItem("gl_user",u.toLowerCase())}catch(e){}
-if(last&&last!==u.toLowerCase()){REC=[];persist()}
-$("g-p").value="";try{history.replaceState(null,"",location.pathname)}catch(e){}gate();drawRec();setTimeout(function(){$("r-sync").click()},0)}catch(e){m.textContent="Server not reachable."}};
-function dl(name,type,txt){var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type:type}));a.download=name;a.click()}
-$("r-ex").onclick=function(){dl("goldlab-backup-"+new Date().toISOString().slice(0,10)+".json","application/json",JSON.stringify(REC))};
-$("r-cv").onclick=function(){var h=["date","token","customer","type","kaatType","ratti","karat","total_g","khalis_g","rate","balance","amount"],q=function(v){return'"'+String(v===undefined?"":v).replace(/"/g,'""')+'"'};
-dl("goldlab-records.csv","text/csv","\ufeff"+[h.join(",")].concat(REC.map(function(r){return h.map(function(k){return q(r[k])}).join(",")})).join("\n"))};
-$("r-im").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var L=JSON.parse(r.result);L.forEach(function(o){if(!REC.some(function(x){return x.token===o.token&&x.date===o.date}))REC.push(o)});REC.sort(function(a,b){return a.date<b.date?1:-1});persist();drawRec();$("r-msg").textContent="Backup restored."}catch(e){$("r-msg").textContent="Invalid backup file."}};r.readAsText(f)};
-try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
-function chips(){$("chl").innerHTML=Object.keys(AL).map(function(k){return'<button data-a="'+k+'" class="'+(k===al?"on":"")+'">'+AL[k]+'</button>'}).join("");
-[].forEach.call($("chl").children,function(b){b.onclick=function(){al=b.dataset.a;chips();lab()}})}
-function lab(){var wa=+$("wa").value,ww=+$("ww").value,rate=+$("rt").value,lc=+$("lc").value||0,pc=+$("pc").value||0,o=$("lo");
-if(!$("wa").value||!$("ww").value){o.innerHTML="";return}
-if(wa<=0||ww<=0||ww>=wa){o.innerHTML='<div class="er">Water weight must be less than air weight.</div>';return}
-var rA=+S[al],w=S.tm==="on"?wd(+S.t):1,rho=wa/(wa-ww)*w,x=RG*(rho-rA)/(rho*(RG-rA)),warn=x<0||x>1;x=Math.max(0,Math.min(1,x));
-var kg=wa*(1-x),pg=wa*x,kr=(1-x)*96,ka=Math.floor(kr/6),pts=(x*1000).toFixed(2),kt=(x*24).toFixed(2),rIN=kr.toFixed(2);
-var T=[["Weight (Amad)"].concat(tarN(wa),[wa.toFixed(3)]),["Milawat / tola",0,ka,(kr-ka*6).toFixed(2),(1-x).toFixed(4)],["Kaat"].concat(tarN(kg),[kg.toFixed(3)]),["Khalis"].concat(tarN(pg),[pg.toFixed(3)])];
-T[3].k=1;
-var val=wa/TG*rate*x,ch=lc+pc*wa,M=[["Rate / tola",rate>0?fm(rate):"-"],["Price (Qeemat)",rate>0?fm(val):"-"],["Lab charge",fm(lc)],["Total charge",fm(ch)],["Balance (Baqaya)",rate>0?fm(val-ch):"-"]];
-function tb(cls){return'<table class="'+cls+'"><tr><th></th><th>Tola</th><th>Aana</th><th>Ratti</th><th>Gram</th></tr>'+T.map(function(r){return'<tr'+(r.k?' class="k"':"")+'>'+r.map(function(c){return"<td>"+c+"</td>"}).join("")+"</tr>"}).join("")+"</table>"}
-o.innerHTML=(warn?'<div class="er">Density is outside the range for this kaat type. Check weights or type.</div>':"")+'<div class="hero"><b>'+rIN+'</b><span>Ratti IN · '+AL[al]+'<br>Points '+pts+' · '+kt+' Karat</span></div>'+tb("tb")+'<div class="rs">'+M.map(function(r,n){return"<div><span>"+r[0]+"</span><b"+(n===4?' style="color:var(--ac)"':"")+">"+r[1]+"</b></div>"}).join("")+'</div><div class="f"><label>Customer name (for slip)</label><input id="cu"></div><button class="btn" id="pb">Print Slip</button>';
-$("pb").onclick=function(){var b=tb("").replace("<table",'<table style="width:100%;text-align:center"');
-b+='<hr><table style="width:100%">'+M.map(function(r){return'<tr><td>'+r[0]+'</td><td style="text-align:right">'+r[1]+'</td></tr>'}).join("")+'<tr><td>Karat</td><td style="text-align:right">'+kt+'</td></tr><tr><td>Points</td><td style="text-align:right">'+pts+'</td></tr><tr><td><b>RATTI_IN</b></td><td style="text-align:right"><b>'+rIN+'</b></td></tr></table>';
-slip("LAB",null,$("cu").value,b,{type:"lab",air:wa,water:ww,kaatType:AL[al],ratti:+rIN,points:+pts,karat:+kt,total_g:wa,khalis_g:+pg.toFixed(3),kaat_g:+kg.toFixed(3),rate:rate,price:Math.round(val),charge:ch,balance:Math.round(val-ch)})}}
-function kaat(){var w=+$("kw").value,r=+$("kr").value,k=(+$("ka").value||0)*6+(+$("kt").value||0),o=$("ko");
-if(!w||w<=0){o.innerHTML="";return}if(k<0||k>=96){o.innerHTML='<div class="er">Kaat must be between 0 and 16 Aana.</div>';return}
-var p=(96-k)/96,pg=w*p,kg=w-pg,rows=[["Weight",w.toFixed(3)+" g<br>"+tar(w)],["Kaat per tola",Math.floor(k/6)+" Aana "+(k%6).toFixed(2)+" Ratti"],["Khalis",pg.toFixed(3)+" g<br>"+tar(pg)],["Kaat",kg.toFixed(3)+" g<br>"+tar(kg)]];
-if(r>0)rows.push(["Rate per tola",fm(r)],["Net rate per tola",fm(r*p)],["Amount",fm(pg/TG*r)]);
-show(o,rows,[(p*100).toFixed(2)+"%",(p*24).toFixed(2)+" Karat"],"Kaat Slip");
-var c=document.createElement("div");c.className="f";c.innerHTML='<label>Customer name (for slip)</label><input id="cu2">';o.insertBefore(c,$("pb"));
-$("pb").onclick=function(){slip("Kaat Slip",rows,$("cu2").value,null,{type:"kaat",weight:w,kaat_ratti_per_tola:k,rate:r,khalis_g:+pg.toFixed(3),amount:Math.round(pg/TG*r)})}}
-["wa","ww","rt"].forEach(function(i,n,a){$(i).oninput=lab;$(i).onkeydown=function(e){if(e.key==="Enter"&&a[n+1])$(a[n+1]).focus()}});
-["kw","kr","ka","kt"].forEach(function(i){$(i).oninput=kaat});
-[].forEach.call(document.querySelectorAll("nav button"),function(b){b.onclick=function(){[].forEach.call(document.querySelectorAll("nav button"),function(x){x.classList.toggle("on",x===b)});[].forEach.call(document.querySelectorAll(".pg"),function(p){p.classList.toggle("on",p.id==="p-"+b.dataset.p)})}});
-var F={"s-shop":"shop","s-addr":"addr","s-ph":"ph","s-foot":"foot","s-pw":"pw","s-rate":"rate","s-tm":"tm","s-t":"t","s-rs":"rs","s-rc":"rc","s-st":"st","s-mx":"mx","s-ps":"ps","s-s1":"s1","s-s2":"s2","s-l1":"l1","s-fg":"fg"};
-for(var id in F)$(id).value=S[F[id]];
-$("s-logo").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var c=document.createElement("canvas"),s=Math.min(1,300/im.width);c.width=im.width*s;c.height=im.height*s;c.getContext("2d").drawImage(im,0,0,c.width,c.height);S.logo=c.toDataURL("image/png");head()};im.src=r.result};r.readAsDataURL(f)};
-$("s-lx").onclick=function(){S.logo="";head()};
-$("s-save").onclick=function(){for(var id in F)S[F[id]]=$(id).value;S.t=+S.t||30;if($("s-tok").value)tok=+$("s-tok").value-1;try{localStorage.setItem("gl_k",tok)}catch(e){}["rs","rc","st","ps","mx","s1","s2","l1","fg"].forEach(function(k){S[k]=+S[k]});try{localStorage.setItem("gl_s",JSON.stringify(S));$("s-msg").textContent="Saved."}catch(e){$("s-msg").textContent="Saved for this session only (browser storage unavailable)."}head();$("rt").value=S.rate;lab()};
-$("c-t").innerHTML=Object.keys(AL).map(function(k){return'<option value="'+k+'">'+AL[k]+"</option>"}).join("");$("c-go").onclick=function(){var a=+$("c-a").value,w=+$("c-w").value,r=+$("c-r").value,k=$("c-t").value,m=$("c-msg");if(!(a>w&&w>0&&r>0&&r<96)){m.textContent="Check the numbers.";return}var wf=S.tm==="on"?wd(+S.t):1,rho=a/(a-w)*wf,x=1-r/96,ra=RG*rho*(1-x)/(RG-x*rho);if(!(ra>1&&ra<25)){m.textContent="Result looks impossible, check the numbers.";return}$("s-"+k).value=ra.toFixed(3);m.textContent=AL[k]+" density = "+ra.toFixed(3)+". Press Save Settings."};$("rt").value=S.rate;$("s-tok").value=tok+1;["lc","pc"].forEach(function(i){$(i).oninput=lab});$("r-q").oninput=drawRec;drawRec();gate();head();chips();
-</script></body></html>
+function drawRec(){var q=($("r-q").value||"").toLowerCase(),h="";REC.forEach(function(r,i){if(q&&(r.customer||"").toLowerCase(<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gold Lab</title>
+<style>
+:root{--bg:#fbf4df;--cd:#fffdf5;--tx:#2e2208;--mu:#8a7240;--bd:#ead9a4;--ac:#a97709;--ac2:#e3b233;--er:#b3261e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding-bottom:90px}
+header{display:flex;align-items:center;gap:12px;padding:16px;max-width:640px;margin:0 auto}
+header img{height:44px;border-radius:8px}
+header h1{margin:0;font-size:1.25rem;color:var(--ac)}header small{color:var(--mu)}
+main{max-width:640px;margin:0 auto;padding:0 16px}
+.pg{display:none}.pg.on{display:block}
+.st{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:14px}
+.n{width:34px;height:34px;border-radius:50%;background:var(--ac);color:#fff;display:grid;place-items:center;font-weight:700;flex:none}
+.st label{font-size:.75rem;color:var(--mu);display:block}
+.st input{border:0;background:transparent;color:var(--tx);font-size:1.7rem;font-weight:600;width:100%;outline:none;padding:0}
+.f{margin-bottom:12px}.f label{display:block;font-size:.78rem;color:var(--mu);margin-bottom:4px}
+.f input,.f select{width:100%;padding:11px;font-size:1rem;border:1px solid var(--bd);border-radius:10px;background:var(--cd);color:var(--tx)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ch{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 14px}
+.ch button{flex:1;min-width:70px;padding:10px;border-radius:99px;border:1px solid var(--bd);background:var(--cd);color:var(--tx);font-size:.9rem;cursor:pointer}
+.ch button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.hero{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border-radius:18px;padding:18px;text-align:center;margin-bottom:12px}
+.hero b{font-size:2.4rem;display:block}.hero span{opacity:.9}
+.rs{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:6px 16px;margin-bottom:12px}
+.rs div{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--bd);font-size:.92rem}
+.rs div:last-child{border:0}.rs span{color:var(--mu)}.rs b{text-align:right}
+.btn{width:100%;padding:14px;border:0;border-radius:12px;background:var(--ac);color:#fff;font-size:1rem;font-weight:600;cursor:pointer}
+.er{color:var(--er);padding:10px 0}.nt{font-size:.78rem;color:var(--mu);margin:8px 0}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--cd);border-top:1px solid var(--bd);display:flex;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;padding:14px 4px;border:0;background:none;color:var(--mu);font-size:.85rem;cursor:pointer}
+nav button.on{color:var(--ac);font-weight:700}
+#rc{display:none}.tb{width:100%;border-collapse:collapse;background:var(--cd);border:1px solid var(--bd);border-radius:12px;margin-bottom:12px;font-size:.9rem}.tb th{color:var(--mu);font-weight:500;font-size:.75rem;padding:8px 4px}.tb td{padding:9px 4px;border-top:1px solid var(--bd);text-align:center}.tb td:first-child{text-align:left;padding-left:10px;color:var(--mu)}.tb tr.k td{font-weight:700;color:var(--tx)}
+@media print{@page{margin:0}body *{visibility:hidden}#rc,#rc *{visibility:visible}#rc{display:block;position:absolute;left:0;top:0;color:#000;background:#fff;font:12px monospace;padding:4px 6px}#rc hr{border:0;border-top:1px dashed #000}#rc td{padding:1px 0}}
+#gate{position:fixed;inset:0;z-index:50;background:var(--bg);display:none;align-items:center;justify-content:center;padding:20px}#gate .bx{width:100%;max-width:380px}
+header{max-width:none;margin:0 0 16px;padding:18px 18px 22px;background:linear-gradient(135deg,#5c3d04,#b8860b 60%,#e6b832);color:#fff;border-radius:0 0 24px 24px;box-shadow:0 6px 18px rgba(120,80,0,.25)}
+header h1{color:#fff;font-size:1.35rem;letter-spacing:.5px}header small{color:#ffe9a6}header img{background:#fff;padding:3px;border-radius:10px}
+.st{border-left:5px solid var(--ac2);box-shadow:0 2px 8px rgba(120,80,0,.08)}.n{background:linear-gradient(135deg,#b8860b,#e6b832)}
+.btn{background:linear-gradient(135deg,#9a6b08,#d4a017);box-shadow:0 3px 10px rgba(150,100,0,.3)}
+.hero{background:linear-gradient(135deg,#4a3003,#a67608 55%,#e6b832);box-shadow:0 6px 16px rgba(120,80,0,.3)}
+.rs,.tb{box-shadow:0 2px 8px rgba(120,80,0,.08)}.tb th{background:#f3e6b8;color:#5c3d04}
+.ch button.on{background:linear-gradient(135deg,#9a6b08,#d4a017);border-color:#b8860b}
+nav{background:#2e2208;border-top:0}nav button{color:#cdb67a}nav button.on{color:#ffd45c}
+</style></head><body>
+<header><img id="hl" alt="" style="display:none"><div><h1 id="hn">Gold Lab</h1><small id="hs"></small></div></header>
+<main>
+<section class="pg on" id="p-lab">
+<div class="st"><div class="n">1</div><div><label>Weight in Air (g)</label><input id="wa" type="number" step="0.001" inputmode="decimal" placeholder="0.000"></div></div>
+<div class="st"><div class="n">2</div><div><label>Weight in Water (g)</label><input id="ww" type="number" step="0.001" inputmode="decimal" placeholder="0.000"></div></div>
+<div class="st"><div class="n">3</div><div><label>Rate per Tola (Rs)</label><input id="rt" type="number" inputmode="numeric" placeholder="0"></div></div>
+<div class="ch" id="chl"></div><div class="g2"><div class="f"><label>Lab charge (Rs)</label><input id="lc" type="number" inputmode="numeric"></div><div class="f"><label>Charge per gram (Rs)</label><input id="pc" type="number" inputmode="numeric"></div></div>
+<div id="lo"></div>
+</section>
+<section class="pg" id="p-kaat">
+<p class="nt">Manual kaat: you decide how much kaat per tola. Weight is in grams, kaat in Aana and Ratti per tola.</p>
+<div class="st"><div class="n">1</div><div><label>Weight (g)</label><input id="kw" type="number" step="0.001" inputmode="decimal" placeholder="0.000"></div></div>
+<div class="st"><div class="n">2</div><div><label>Rate per Tola (Rs)</label><input id="kr" type="number" inputmode="numeric" placeholder="0"></div></div>
+<div class="st"><div class="n">3</div><div style="flex:1"><label>Kaat per Tola</label><div class="g2"><input id="ka" type="number" inputmode="decimal" placeholder="Aana"><input id="kt" type="number" inputmode="decimal" placeholder="Ratti"></div></div></div>
+<div id="ko"></div>
+</section>
+<section class="pg" id="p-rec"><div class="f"><input id="r-q" placeholder="Search customer name"></div><button class="btn" id="r-sync" style="background:var(--mu);margin-bottom:8px">Sync with server</button><div class="g2" style="margin-bottom:8px"><button class="btn" id="r-ex" style="background:var(--mu)">Backup (JSON)</button><button class="btn" id="r-cv" style="background:var(--mu)">Export CSV</button></div><div class="f"><label>Restore from backup file</label><input id="r-im" type="file" accept=".json"></div><p class="nt" id="r-msg"></p><div id="r-l"></div></section>
+<section class="pg" id="p-set">
+<div class="f"><label>Shop name</label><input id="s-shop"></div>
+<div class="f"><label>Address</label><input id="s-addr"></div>
+<div class="f"><label>Phone</label><input id="s-ph"></div>
+<div class="f"><label>Logo (image)</label><input id="s-logo" type="file" accept="image/*"><button class="btn" id="s-lx" style="margin-top:6px;background:var(--mu)">Remove logo</button></div>
+<div class="f"><label>Slip footer text</label><input id="s-foot"></div>
+<div class="g2"><div class="f"><label>Slip width</label><select id="s-pw"><option>58mm</option><option>80mm</option></select></div>
+<div class="f"><label>Default rate per tola (Rs)</label><input id="s-rate" type="number"></div></div><div class="f"><label>Print method</label><select id="s-pm"><option value="bt">Direct Bluetooth (BLE printer)</option><option value="rawbt">RawBT app (classic Bluetooth)</option><option value="browser">Browser print dialog</option></select></div>
+<div class="g2"><div class="f"><label>Water temperature</label><select id="s-tm"><option value="off">Ignore (1.000)</option><option value="on">Use correction</option></select></div>
+<div class="f"><label>Temperature (°C)</label><input id="s-t" type="number" step="0.5"></div></div>
+<button class="btn" id="lo-btn" style="background:var(--mu);margin-bottom:12px;display:none">Log out</button>
+<p class="nt">Alloy densities (g/cm³), editable:</p>
+<div class="g2"><div class="f"><label>Silver</label><input id="s-rs" type="number" step="0.01"></div><div class="f"><label>Copper</label><input id="s-rc" type="number" step="0.01"></div>
+<div class="f"><label>Standard</label><input id="s-st" type="number" step="0.01"></div><div class="f"><label>P_Silver</label><input id="s-ps" type="number" step="0.01"></div><div class="f"><label>Mix540</label><input id="s-mx" type="number" step="0.01"></div><div class="f"><label>Standard 1</label><input id="s-s1" type="number" step="0.001"></div><div class="f"><label>Standard 2</label><input id="s-s2" type="number" step="0.001"></div><div class="f"><label>Local 1</label><input id="s-l1" type="number" step="0.001"></div><div class="f"><label>False Gold</label><input id="s-fg" type="number" step="0.001"></div></div>
+<p class="nt"><b>Calibrate from your old software:</b> pick a type, enter the same air and water weights and the Ratti IN your old software shows. The density is worked out and filled in above. Then press Save Settings.</p>
+<div class="g2"><div class="f"><label>Type</label><select id="c-t"></select></div><div class="f"><label>Ratti IN (old software)</label><input id="c-r" type="number" step="0.01"></div><div class="f"><label>Air (g)</label><input id="c-a" type="number" step="0.001"></div><div class="f"><label>Water (g)</label><input id="c-w" type="number" step="0.001"></div></div><button class="btn" id="c-go" style="background:var(--mu);margin-bottom:6px">Calibrate</button><p class="nt" id="c-msg"></p>
+<div class="f"><label>Next token number</label><input id="s-tok" type="number"></div>
+<button class="btn" id="s-save">Save Settings</button><p class="nt" id="s-msg"></p>
+</section>
+</main>
+<div id="rc"></div>
+<div id="ts" style="position:fixed;left:12px;right:12px;bottom:84px;z-index:60;background:#2e2208;color:#fff;padding:10px 14px;border-radius:12px;display:none"></div>
+<div id="md" style="display:none;position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.55);overflow:auto;padding:14px"><div style="max-width:440px;margin:0 auto;background:var(--cd);border-radius:16px;padding:14px"><img id="md-i" alt="" style="width:100%;border:1px solid var(--bd);border-radius:8px;background:#fff"><p class="nt" id="md-n"></p><div class="f" style="margin-top:10px"><label>Customer name</label><input id="md-c"></div><div class="g2"><button class="btn" id="md-s">Save name</button><button class="btn" id="md-p">Print again</button><button class="btn" id="md-o" style="background:var(--mu)">Open in Lab</button><button class="btn" id="md-d" style="background:var(--er)">Delete</button></div><button class="btn" id="md-x" style="background:none;color:var(--mu);box-shadow:none">Close</button></div></div>
+<div id="gate"><div class="bx"><h1 style="color:var(--ac);text-align:center">Gold Lab</h1><div class="f"><label>Username</label><input id="g-u" autocomplete="username"></div><div class="f"><label>Password</label><input id="g-p" type="password" autocomplete="current-password"></div><div class="f" id="g-cw" style="display:none"><label>Invite code</label><input id="g-code"></div><button class="btn" id="g-go">Log in</button><p class="nt" id="g-m"></p><p class="nt" id="g-sw" style="text-align:center;cursor:pointer;color:var(--ac)">Have an invite? Register</p></div></div>
+<nav><button class="on" data-p="lab">Lab</button><button data-p="kaat">Kaat</button><button data-p="rec">Records</button><button data-p="set">Settings</button></nav>
+<script>
+var $=function(i){return document.getElementById(i)},RG=19.32,TG=11.664;
+var WT=[[10,.9997],[15,.9991],[20,.99821],[25,.99705],[30,.99565],[35,.99403],[40,.99222]];
+// ===== PUT YOUR SERVER URL HERE (example: https://goldlab-api.onrender.com). Leave empty for offline mode. =====
+var SERVER="";
+var D={shop:"Gold Lab",addr:"",ph:"",logo:"",foot:"Estimate only (density method)",pw:"80mm",rate:"",tm:"off",t:30,rs:10.49,rc:8.96,st:8.96,ps:10.09,mx:9.98,s1:8.96,s2:9.66,l1:9.98,fg:8.5,pm:"bt"},S={},tok=0,al="st";
+try{S=JSON.parse(localStorage.getItem("gl_s")||"{}");tok=+localStorage.getItem("gl_k")||0}catch(e){}
+for(var k in D)if(S[k]===undefined)S[k]=D[k];
+var AL={st:"Standard",rs:"Silver",rc:"Copper",ps:"P_Silver",mx:"Mix540",s1:"Standard 1",s2:"Standard 2",l1:"Local 1",fg:"False Gold"};
+function wd(t){t=Math.max(10,Math.min(40,t));for(var i=0;i<6;i++){var a=WT[i],b=WT[i+1];if(t<=b[0])return a[1]+(b[1]-a[1])*(t-a[0])/(b[0]-a[0])}return .99222}
+function tarN(g){var r=Math.round(g/TG*96*100)/100,t=Math.floor(r/96);r-=t*96;var a=Math.floor(r/6);r=Math.round((r-a*6)*100)/100;if(r>=6){a++;r=0}return[t,a,r.toFixed(2)]}
+function tar(g){var q=tarN(g);return q[0]+"T "+q[1]+"A "+q[2]+"R"}
+function fm(n){return"Rs "+Math.round(n).toLocaleString("en-PK")}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function head(){$("hn").textContent=S.shop||"Gold Lab";$("hs").textContent=[S.addr,S.ph].filter(Boolean).join(" · ");var l=$("hl");l.style.display=S.logo?"block":"none";l.src=S.logo||"";LOGO=null;if(S.logo){LOGO=new Image();LOGO.src=S.logo}}
+function show(el,rows,hero,title,cu){
+var h=hero?'<div class="hero"><b>'+hero[0]+'</b><span>'+hero[1]+'</span></div>':"";
+el.innerHTML=h+'<div class="rs">'+rows.map(function(r){return"<div><span>"+r[0]+"</span><b>"+r[1]+"</b></div>"}).join("")+'</div><button class="btn" id="pb">Print Slip</button>';
+$("pb").onclick=function(){slip(title,rows,cu?cu.value:"")}}
+var LOGO=null,BT=null,tt=0;
+function toast(t){var e=$("ts");e.textContent=t;e.style.display="block";clearTimeout(tt);tt=setTimeout(function(){e.style.display="none"},5000)}
+function drawSlip(d){var W=S.pw==="58mm"?384:576,k=W/384,c=document.createElement("canvas");c.width=W;c.height=Math.round(2000*k);var x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,W,c.height);x.fillStyle=x.strokeStyle="#000";x.textBaseline="middle";
+var m=12*k,iw=W-2*m,y=m+4*k,i;
+function T(t,px,xx,yy,al,b,mw){x.font=(b?"bold ":"")+px*k+"px sans-serif";x.textAlign=al;x.fillText(t,xx,yy,mw)}
+function B(y1,h,w){x.lineWidth=(w||2)*k;x.strokeRect(m,y1,iw,h)}
+if(LOGO&&LOGO.complete&&LOGO.naturalWidth){var lh=54*k,lw=LOGO.naturalWidth*lh/LOGO.naturalHeight;if(lw>iw*.6){lw=iw*.6;lh=lw*LOGO.naturalHeight/LOGO.naturalWidth}x.drawImage(LOGO,(W-lw)/2,y,lw,lh);y+=lh+4*k}
+y+=14*k;T(d.shop||"",26,W/2,y,"center",1,iw);y+=24*k;
+if(d.addr){T(d.addr,15,W/2,y,"center",0,iw);y+=19*k}
+if(d.ph){T(d.ph,15,W/2,y,"center",1,iw);y+=19*k}
+y+=6*k;x.fillRect(m,y,iw,30*k);x.fillStyle="#fff";T(d.title,19,W/2,y+16*k,"center",1);x.fillStyle="#000";y+=30*k;
+B(y,28*k);x.beginPath();x.moveTo(W*.38,y);x.lineTo(W*.38,y+28*k);x.stroke();
+T("#"+d.tok,17,(m+W*.38)/2,y+15*k,"center",1);T(d.date,14,(W*.38+W-m)/2,y+15*k,"center",0,W*.62-m-8*k);y+=28*k;
+if(d.cust){B(y,28*k);T("Customer: "+d.cust,16,m+6*k,y+15*k,"left",1,iw-12*k);y+=28*k}
+y+=10*k;
+if(d.big){B(y,66*k,4);B(y+5*k,56*k,1.5);T(d.big[0],14,W/2,y+17*k,"center",0);T(d.big[1],34,W/2,y+43*k,"center",1,iw-20*k);y+=66*k;if(d.sub){T(d.sub,14,W/2,y+14*k,"center",0,iw);y+=26*k}y+=8*k}
+if(d.cols){var fr=[.3,.14,.15,.15,.26],xs=[m],rh=28*k;fr.forEach(function(f,n){xs.push(xs[n]+f*iw)});
+var row=function(r,hd,bd){if(hd){x.fillRect(m,y,iw,rh);x.fillStyle="#fff"}r.forEach(function(v,n){var cx=xs[n],cw=xs[n+1]-cx;T(String(v),n?15:13,n?cx+cw/2:cx+4*k,y+rh/2,n?"center":"left",hd||bd||!n,cw-6*k)});x.fillStyle="#000";x.lineWidth=1.5*k;for(i=0;i<5;i++)x.strokeRect(xs[i],y,xs[i+1]-xs[i],rh);y+=rh};
+row(d.cols,1);d.rows.forEach(function(r,n){row(r,0,n===d.rows.length-1)});y+=10*k}
+d.kv.forEach(function(r){var h=30*k;if(r[2]){x.fillRect(m,y,iw,h);x.fillStyle="#fff"}T(r[0],15,m+6*k,y+h/2,"left",1,iw*.5-10*k);T(String(r[1]),16,m+iw*.75,y+h/2,"center",1,iw*.5-8*k);x.fillStyle="#000";B(y,h,1.5);x.beginPath();x.moveTo(m+iw*.5,y);x.lineTo(m+iw*.5,y+h);x.stroke();y+=h});
+y+=12*k;x.setLineDash([8*k,5*k]);x.lineWidth=2*k;x.beginPath();x.moveTo(m,y);x.lineTo(W-m,y);x.stroke();x.setLineDash([]);y+=18*k;T(d.foot||"",13,W/2,y,"center",0,iw);y+=20*k;T("* Thank you *",15,W/2,y,"center",1);y+=26*k;
+var o=document.createElement("canvas");o.width=W;o.height=Math.round(y+8*k);var q=o.getContext("2d");q.fillStyle="#fff";q.fillRect(0,0,W,o.height);q.drawImage(c,0,0);q.strokeStyle="#000";q.lineWidth=3*k;q.strokeRect(2*k,2*k,W-4*k,o.height-4*k);q.lineWidth=k;q.strokeRect(5.5*k,5.5*k,W-11*k,o.height-11*k);return o}
+function rasterize(c){var w=c.width,h=c.height,p=c.getContext("2d").getImageData(0,0,w,h).data,bw=w/8,o=[27,64];
+for(var y0=0;y0<h;y0+=96){var hh=Math.min(96,h-y0);o.push(29,118,48,0,bw&255,bw>>8,hh&255,hh>>8);for(var y=y0;y<y0+hh;y++)for(var b=0;b<bw;b++){var v=0;for(var i=0;i<8;i++){var j=(y*w+b*8+i)*4;if(p[j]*.3+p[j+1]*.59+p[j+2]*.11<140)v|=128>>i}o.push(v)}}
+o.push(27,100,4);return new Uint8Array(o)}
+var SV=["000018f0-0000-1000-8000-00805f9b34fb","0000ff00-0000-1000-8000-00805f9b34fb","0000ffe0-0000-1000-8000-00805f9b34fb","0000fff0-0000-1000-8000-00805f9b34fb","e7810a71-73ae-499d-8c15-faa9aef0c3f2","49535343-fe7d-4ae5-8fa9-9fafd205e455"];
+async function btCh(){if(BT&&BT.dev.gatt.connected)return BT.ch;var dev=BT?BT.dev:await navigator.bluetooth.requestDevice({acceptAllDevices:true,optionalServices:SV}),srv=await dev.gatt.connect(),ss=await srv.getPrimaryServices(),ch=null;
+for(var s of ss){var cs=await s.getCharacteristics();for(var c of cs)if(c.properties.writeWithoutResponse||c.properties.write){ch=c;break}if(ch)break}
+if(!ch)throw new Error("printer has no BLE write channel");BT={dev:dev,ch:ch};return ch}
+async function btSend(b){var ch=await btCh(),n=180,i=0,f=ch.properties.writeWithoutResponse?"writeValueWithoutResponse":"writeValue";
+while(i<b.length){try{await ch[f](b.slice(i,i+n));i+=n;await new Promise(function(r){setTimeout(r,12)})}catch(e){if(n>100)n=100;else if(n>20)n=20;else throw e}}}
+async function out(d){var c=drawSlip(d);
+if(S.pm==="bt"&&navigator.bluetooth){try{toast("Printing...");await btSend(rasterize(c));toast("Printed.");return}catch(e){toast("Bluetooth print failed ("+(e.message||e)+"). Using normal print.")}}
+if(S.pm==="rawbt"){var u=rasterize(c),s="";for(var i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));location.href="rawbt:base64,"+btoa(s);return}
+$("rc").innerHTML='<img style="width:100%" src="'+c.toDataURL("image/png")+'">';setTimeout(function(){window.print()},200)}
+function slip(d,rec){tok++;try{localStorage.setItem("gl_k",tok)}catch(e){}$("s-tok").value=tok+1;var n=new Date();d.tok=tok;d.date=n.toLocaleDateString("en-GB")+" "+n.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});d.shop=S.shop;d.addr=S.addr;d.ph=S.ph;d.foot=S.foot;if(rec){rec.slip=d;saveRec(rec,d.cust)}out(d)}
+var REC=[];try{REC=JSON.parse(localStorage.getItem("gl_rec")||"[]")}catch(e){}
+function persist(){try{localStorage.setItem("gl_rec",JSON.stringify(REC.slice(0,3000)))}catch(e){}}
+function api(){return SERVER.replace(/\/$/,"")+"/records"}
+function post(r){if(!SERVER||!JWT)return Promise.resolve(false);var c=Object.assign({},r);delete c.sent;delete c.slip;return fetch(api(),{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+JWT},body:JSON.stringify(c)}).then(function(x){if(x.status===401)logout();return x.ok}).catch(function(){return false})}
+function saveRec(rec,cu){rec.token=tok;rec.customer=cu||"";rec.shop=S.shop;rec.date=new Date().toISOString();rec.sent=false;REC.unshift(rec);persist();drawRec();post(rec).then(function(ok){if(ok){rec.sent=true;persist();drawRec()}})}
+function drawRec(){var q=($("r-q").value||"").toLowerCase(),h="";REC.forEach(function(r,i){if(q&&(r.customer||"").toLowerCase(<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gold Lab</title>
+<style>
+:root{--bg:#fbf4df;--cd:#fffdf5;--tx:#2e2208;--mu:#8a7240;--bd:#ead9a4;--ac:#a97709;--ac2:#e3b233;--er:#b3261e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding-bottom:90px}
+header{display:flex;align-items:center;gap:12px;padding:16px;max-width:640px;margin:0 auto}
+header img{height:44px;border-radius:8px}
+header h1{margin:0;font-size:1.25rem;color:var(--ac)}header small{color:var(--mu)}
+main{max-width:640px;margin:0 auto;padding:0 16px}
+.pg{display:none}.pg.on{display:block}
+.st{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:14px}
+.n{width:34px;height:34px;border-radius:50%;background:var(--ac);color:#fff;display:grid;place-items:center;font-weight:700;flex:none}
+.st label{font-size:.75rem;color:var(--mu);display:block}
+.st input{border:0;background:transparent;color:var(--tx);font-size:1.7rem;font-weight:600;width:100%;outline:none;padding:0}
+.f{margin-bottom:12px}.f label{display:block;font-size:.78rem;color:var(--mu);margin-bottom:4px}
+.f input,.f select{width:100%;padding:11px;font-size:1rem;border:1px solid var(--bd);border-radius:10px;background:var(--cd);color:var(--tx)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ch{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 14px}
+.ch button{flex:1;min-width:70px;padding:10px;border-radius:99px;border:1px solid var(--bd);background:var(--cd);color:var(--tx);font-size:.9rem;cursor:pointer}
+.ch button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.hero{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border-radius:18px;padding:18px;text-align:center;margin-bottom:12px}
+.hero b{font-size:2.4rem;display:block}.hero span{opacity:.9}
+.rs{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:6px 16px;margin-bottom:12px}
+.rs div{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--bd);font-size:.92rem}
+.rs div:last-child{border:0}.rs span{color:var(--mu)}.rs b{text-align:right}
+.btn{width:100%;padding:14px;border:0;border-radius:12px;background:var(--ac);color:#fff;font-size:1rem;font-weight:600;cursor:pointer}
+.er{color:var(--er);padding:10px 0}.nt{font-size:.78rem;color:var(--mu);margin:8px 0}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--cd);border-top:1px solid var(--bd);display:flex;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;padding:14px 4px;border:0;background:none;color:var(--mu);font-size:.85rem;cursor:pointer}
+nav button.on{color:var(--ac);font-weight:700}
+#rc{display:none}.tb{width:100%;border-collapse:collapse;background:var(--cd);border:1px solid var(--bd);border-radius:12px;margin-bottom:12px;font-size:.9rem}.tb th{color:var(--mu);font-weight:500;font-size:.75rem;padding:8px 4px}.tb td{padding:9px 4px;border-top:1px solid var(--bd);text-align:center}.tb td:first-child{text-align:left;padding-left:10px;color:var(--mu)}.tb tr.k td{font-weight:700;color:var(--tx)}
+@media print{@page{margin:0}body *{visibility:hidden}#rc,#rc *{visibility:visible}#rc{display:block;position:absolute;left:0;top:0;color:#000;background:#fff;font:12px monospace;padding:4px 6px}#rc hr{border:0;border-top:1px dashed #000}#rc td{padding:1px 0}}
+#gate{position:fixed;inset:0;z-index:50;background:var(--bg);display:none;align-items:center;justify-content:center;padding:20px}#gate .bx{width:100%;max-width:380px}
+header{max-width:none;margin:0 0 16px;padding:18px 18px 22px;background:linear-gradient(135deg,#5c3d04,#b8860b 60%,#e6b832);color:#fff;border-radius:0 0 24px 24px;box-shadow:0 6px 18px rgba(120,80,0,.25)}
+header h1{color:#fff;font-size:1.35rem;letter-spacing:.5px}header small{color:#ffe9a6}header img{background:#fff;padding:3px;border-radius:10px}
+.st{border-left:5px solid var(--ac2);box-shadow:0 2px 8px rgba(120,80,0,.08)}.n{background:linear-gradient(135deg,#b8860b,#e6b832)}
+.btn{background:linear-gradient(135deg,#9a6b08,#d4a017);box-shadow:0 3px 10px rgba(150,100,0,.3)}
+.hero{background:linear-gradient(135deg,#4a3003,#a67608 55%,#e6b832);box-shadow:0 6px 16px rgba(120,80,0,.3)}
+.rs,.tb{box-shadow:0 2px 8px rgba(120,80,0,.08)}.tb th{background:#f3e6b8;color:#5c3d04}
+.ch button.on{background:linear-gradient(135deg,#9a6b08,#d4a017);border-color:#b8860b}
+nav{background:#2e2208;border-top:0}nav button{color:#cdb67a}nav button.on{color:#ffd45c}
+</style></head><body>
+<header><img id="hl" alt="" style="display:none"><div><h1 id="hn">Gold Lab</h1><small id="hs"></small></div></header>
+<main>
+<section class="pg on" id="p-lab">
+<div class="st"><div class="n">1</div><div><label>Weight in Air (g)</label><input id="wa" type="number" step="0.001" inputmode="decimal" placeholder="0.000"></div></div>
+<div class="st"><div class="n">2</div><div><label>Weight in Water (g)</label><input id="ww" type="number" step="0.001" inputmode="decimal" placeholder="0.000"></div></div>
+<div class="st"><div class="n">3</div><div><label>Rate per Tola (Rs)</label><input id="rt" type="number" inputmode="numeric" placeholder="0"></div></div>
+<div class="ch" id="chl"></div><div class="g2"><div class="f"><label>Lab charge (Rs)</label><input id="lc" type="number" inputmode="numeric"></div><div class="f"><label>Charge per gram (Rs)</label><input id="pc" type="number" inputmode="numeric"></div></div>
+<div id="lo"></div>
+</section>
+<section class="pg" id="p-kaat">
+<p class="nt">Manual kaat: you decide how much kaat per tola. Weight is in grams, kaat in Aana and Ratti per tola.</p>
+<div class="st"><div class="n">1</div><div><label>Weight (g)</label><input id="kw" type="number" step="0.001" inputmode="decimal" placeholder="0.000"></div></div>
+<div class="st"><div class="n">2</div><div><label>Rate per Tola (Rs)</label><input id="kr" type="number" inputmode="numeric" placeholder="0"></div></div>
+<div class="st"><div class="n">3</div><div style="flex:1"><label>Kaat per Tola</label><div class="g2"><input id="ka" type="number" inputmode="decimal" placeholder="Aana"><input id="kt" type="number" inputmode="decimal" placeholder="Ratti"></div></div></div>
+<div id="ko"></div>
+</section>
+<section class="pg" id="p-rec"><div class="f"><input id="r-q" placeholder="Search customer name"></div><button class="btn" id="r-sync" style="background:var(--mu);margin-bottom:8px">Sync with server</button><div class="g2" style="margin-bottom:8px"><button class="btn" id="r-ex" style="background:var(--mu)">Backup (JSON)</button><button class="btn" id="r-cv" style="background:var(--mu)">Export CSV</button></div><div class="f"><label>Restore from backup file</label><input id="r-im" type="file" accept=".json"></div><p class="nt" id="r-msg"></p><div id="r-l"></div></section>
+<section class="pg" id="p-set">
+<div class="f"><label>Shop name</label><input id="s-shop"></div>
+<div class="f"><label>Address</label><input id="s-addr"></div>
+<div class="f"><label>Phone</label><input id="s-ph"></div>
+<div class="f"><label>Logo (image)</label><input id="s-logo" type="file" accept="image/*"><button class="btn" id="s-lx" style="margin-top:6px;background:var(--mu)">Remove logo</button></div>
+<div class="f"><label>Slip footer text</label><input id="s-foot"></div>
+<div class="g2"><div class="f"><label>Slip width</label><select id="s-pw"><option>58mm</option><option>80mm</option></select></div>
+<div class="f"><label>Default rate per tola (Rs)</label><input id="s-rate" type="number"></div></div><div class="f"><label>Print method</label><select id="s-pm"><option value="bt">Direct Bluetooth (BLE printer)</option><option value="rawbt">RawBT app (classic Bluetooth)</option><option value="browser">Browser print dialog</option></select></div>
+<div class="g2"><div class="f"><label>Water temperature</label><select id="s-tm"><option value="off">Ignore (1.000)</option><option value="on">Use correction</option></select></div>
+<div class="f"><label>Temperature (°C)</label><input id="s-t" type="number" step="0.5"></div></div>
+<button class="btn" id="lo-btn" style="background:var(--mu);margin-bottom:12px;display:none">Log out</button>
+<p class="nt">Alloy densities (g/cm³), editable:</p>
+<div class="g2"><div class="f"><label>Silver</label><input id="s-rs" type="number" step="0.01"></div><div class="f"><label>Copper</label><input id="s-rc" type="number" step="0.01"></div>
+<div class="f"><label>Standard</label><input id="s-st" type="number" step="0.01"></div><div class="f"><label>P_Silver</label><input id="s-ps" type="number" step="0.01"></div><div class="f"><label>Mix540</label><input id="s-mx" type="number" step="0.01"></div><div class="f"><label>Standard 1</label><input id="s-s1" type="number" step="0.001"></div><div class="f"><label>Standard 2</label><input id="s-s2" type="number" step="0.001"></div><div class="f"><label>Local 1</label><input id="s-l1" type="number" step="0.001"></div><div class="f"><label>False Gold</label><input id="s-fg" type="number" step="0.001"></div></div>
+<p class="nt"><b>Calibrate from your old software:</b> pick a type, enter the same air and water weights and the Ratti IN your old software shows. The density is worked out and filled in above. Then press Save Settings.</p>
+<div class="g2"><div class="f"><label>Type</label><select id="c-t"></select></div><div class="f"><label>Ratti IN (old software)</label><input id="c-r" type="number" step="0.01"></div><div class="f"><label>Air (g)</label><input id="c-a" type="number" step="0.001"></div><div class="f"><label>Water (g)</label><input id="c-w" type="number" step="0.001"></div></div><button class="btn" id="c-go" style="background:var(--mu);margin-bottom:6px">Calibrate</button><p class="nt" id="c-msg"></p>
+<div class="f"><label>Next token number</label><input id="s-tok" type="number"></div>
+<button class="btn" id="s-save">Save Settings</button><p class="nt" id="s-msg"></p>
+</section>
+</main>
+<div id="rc"></div>
+<div id="ts" style="position:fixed;left:12px;right:12px;bottom:84px;z-index:60;background:#2e2208;color:#fff;padding:10px 14px;border-radius:12px;display:none"></div>
+<div id="md" style="display:none;position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.55);overflow:auto;padding:14px"><div style="max-width:440px;margin:0 auto;background:var(--cd);border-radius:16px;padding:14px"><img id="md-i" alt="" style="width:100%;border:1px solid var(--bd);border-radius:8px;background:#fff"><p class="nt" id="md-n"></p><div class="f" style="margin-top:10px"><label>Customer name</label><input id="md-c"></div><div class="g2"><button class="btn" id="md-s">Save name</button><button class="btn" id="md-p">Print again</button><button class="btn" id="md-o" style="background:var(--mu)">Open in Lab</button><button class="btn" id="md-d" style="background:var(--er)">Delete</button></div><button class="btn" id="md-x" style="background:none;color:var(--mu);box-shadow:none">Close</button></div></div>
+<div id="gate"><div class="bx"><h1 style="color:var(--ac);text-align:center">Gold Lab</h1><div class="f"><label>Username</label><input id="g-u" autocomplete="username"></div><div class="f"><label>Password</label><input id="g-p" type="password" autocomplete="current-password"></div><div class="f" id="g-cw" style="display:none"><label>Invite code</label><input id="g-code"></div><button class="btn" id="g-go">Log in</button><p class="nt" id="g-m"></p><p class="nt" id="g-sw" style="text-align:center;cursor:pointer;color:var(--ac)">Have an invite? Register</p></div></div>
+<nav><button class="on" data-p="lab">Lab</button><button data-p="kaat">Kaat</button><button data-p="rec">Records</button><button data-p="set">Settings</button></nav>
+<script>
+var $=function(i){return document.getElementById(i)},RG=19.32,TG=11.664;
+var WT=[[10,.9997],[15,.9991],[20,.99821],[25,.99705],[30,.99565],[35,.99403],[40,.99222]];
+// ===== PUT YOUR SERVER URL HERE (example: https://goldlab-api.onrender.com). Leave empty for offline mode. =====
+var SERVER="";
+var D={shop:"Gold Lab",addr:"",ph:"",logo:"",foot:"Estimate only (density method)",pw:"80mm",rate:"",tm:"off",t:30,rs:10.49,rc:8.96,st:8.96,ps:10.09,mx:9.98,s1:8.96,s2:9.66,l1:9.98,fg:8.5,pm:"bt"},S={},tok=0,al="st";
+try{S=JSON.parse(localStorage.getItem("gl_s")||"{}");tok=+localStorage.getItem("gl_k")||0}catch(e){}
+for(var k in D)if(S[k]===undefined)S[k]=D[k];
+var AL={st:"Standard",rs:"Silver",rc:"Copper",ps:"P_Silver",mx:"Mix540",s1:"Standard 1",s2:"Standard 2",l1:"Local 1",fg:"False Gold"};
+function wd(t){t=Math.max(10,Math.min(40,t));for(var i=0;i<6;i++){var a=WT[i],b=WT[i+1];if(t<=b[0])return a[1]+(b[1]-a[1])*(t-a[0])/(b[0]-a[0])}return .99222}
+function tarN(g){var r=Math.round(g/TG*96*100)/100,t=Math.floor(r/96);r-=t*96;var a=Math.floor(r/6);r=Math.round((r-a*6)*100)/100;if(r>=6){a++;r=0}return[t,a,r.toFixed(2)]}
+function tar(g){var q=tarN(g);return q[0]+"T "+q[1]+"A "+q[2]+"R"}
+function fm(n){return"Rs "+Math.round(n).toLocaleString("en-PK")}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function head(){$("hn").textContent=S.shop||"Gold Lab";$("hs").textContent=[S.addr,S.ph].filter(Boolean).join(" · ");var l=$("hl");l.style.display=S.logo?"block":"none";l.src=S.logo||"";LOGO=null;if(S.logo){LOGO=new Image();LOGO.src=S.logo}}
+function show(el,rows,hero,title,cu){
+var h=hero?'<div class="hero"><b>'+hero[0]+'</b><span>'+hero[1]+'</span></div>':"";
+el.innerHTML=h+'<div class="rs">'+rows.map(function(r){return"<div><span>"+r[0]+"</span><b>"+r[1]+"</b></div>"}).join("")+'</div><button class="btn" id="pb">Print Slip</button>';
+$("pb").onclick=function(){slip(title,rows,cu?cu.value:"")}}
+var LOGO=null,BT=null,tt=0;
+function toast(t){var e=$("ts");e.textContent=t;e.style.display="block";clearTimeout(tt);tt=setTimeout(function(){e.style.display="none"},5000)}
+function drawSlip(d){var W=S.pw==="58mm"?384:576,k=W/384,c=document.createElement("canvas");c.width=W;c.height=Math.round(2000*k);var x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,W,c.height);x.fillStyle=x.strokeStyle="#000";x.textBaseline="middle";
+var m=12*k,iw=W-2*m,y=m+4*k,i;
+function T(t,px,xx,yy,al,b,mw){x.font=(b?"bold ":"")+px*k+"px sans-serif";x.textAlign=al;x.fillText(t,xx,yy,mw)}
+function B(y1,h,w){x.lineWidth=(w||2)*k;x.strokeRect(m,y1,iw,h)}
+if(LOGO&&LOGO.complete&&LOGO.naturalWidth){var lh=54*k,lw=LOGO.naturalWidth*lh/LOGO.naturalHeight;if(lw>iw*.6){lw=iw*.6;lh=lw*LOGO.naturalHeight/LOGO.naturalWidth}x.drawImage(LOGO,(W-lw)/2,y,lw,lh);y+=lh+4*k}
+y+=14*k;T(d.shop||"",26,W/2,y,"center",1,iw);y+=24*k;
+if(d.addr){T(d.addr,15,W/2,y,"center",0,iw);y+=19*k}
+if(d.ph){T(d.ph,15,W/2,y,"center",1,iw);y+=19*k}
+y+=6*k;x.fillRect(m,y,iw,30*k);x.fillStyle="#fff";T(d.title,19,W/2,y+16*k,"center",1);x.fillStyle="#000";y+=30*k;
+B(y,28*k);x.beginPath();x.moveTo(W*.38,y);x.lineTo(W*.38,y+28*k);x.stroke();
+T("#"+d.tok,17,(m+W*.38)/2,y+15*k,"center",1);T(d.date,14,(W*.38+W-m)/2,y+15*k,"center",0,W*.62-m-8*k);y+=28*k;
+if(d.cust){B(y,28*k);T("Customer: "+d.cust,16,m+6*k,y+15*k,"left",1,iw-12*k);y+=28*k}
+y+=10*k;
+if(d.big){B(y,66*k,4);B(y+5*k,56*k,1.5);T(d.big[0],14,W/2,y+17*k,"center",0);T(d.big[1],34,W/2,y+43*k,"center",1,iw-20*k);y+=66*k;if(d.sub){T(d.sub,14,W/2,y+14*k,"center",0,iw);y+=26*k}y+=8*k}
+if(d.cols){var fr=[.3,.14,.15,.15,.26],xs=[m],rh=28*k;fr.forEach(function(f,n){xs.push(xs[n]+f*iw)});
+var row=function(r,hd,bd){if(hd){x.fillRect(m,y,iw,rh);x.fillStyle="#fff"}r.forEach(function(v,n){var cx=xs[n],cw=xs[n+1]-cx;T(String(v),n?15:13,n?cx+cw/2:cx+4*k,y+rh/2,n?"center":"left",hd||bd||!n,cw-6*k)});x.fillStyle="#000";x.lineWidth=1.5*k;for(i=0;i<5;i++)x.strokeRect(xs[i],y,xs[i+1]-xs[i],rh);y+=rh};
+row(d.cols,1);d.rows.forEach(function(r,n){row(r,0,n===d.rows.length-1)});y+=10*k}
+d.kv.forEach(function(r){var h=30*k;if(r[2]){x.fillRect(m,y,iw,h);x.fillStyle="#fff"}T(r[0],15,m+6*k,y+h/2,"left",1,iw*.5-10*k);T(String(r[1]),16,m+iw*.75,y+h/2,"center",1,iw*.5-8*k);x.fillStyle="#000";B(y,h,1.5);x.beginPath();x.moveTo(m+iw*.5,y);x.lineTo(m+iw*.5,y+h);x.stroke();y+=h});
+y+=12*k;x.setLineDash([8*k,5*k]);x.lineWidth=2*k;x.beginPath();x.moveTo(m,y);x.lineTo(W-m,y);x.stroke();x.setLineDash([]);y+=18*k;T(d.foot||"",13,W/2,y,"center",0,iw);y+=20*k;T("* Thank you *",15,W/2,y,"center",1);y+=26*k;
+var o=document.createElement("canvas");o.width=W;o.height=Math.round(y+8*k);var q=o.getContext("2d");q.fillStyle="#fff";q.fillRect(0,0,W,o.height);q.drawImage(c,0,0);q.strokeStyle="#000";q.lineWidth=3*k;q.strokeRect(2*k,2*k,W-4*k,o.height-4*k);q.lineWidth=k;q.strokeRect(5.5*k,5.5*k,W-11*k,o.height-11*k);return o}
+function rasterize(c){var w=c.width,h=c.height,p=c.getContext("2d").getImageData(0,0,w,h).data,bw=w/8,o=[27,64];
+for(var y0=0;y0<h;y0+=96){var hh=Math.min(96,h-y0);o.push(29,118,48,0,bw&255,bw>>8,hh&255,hh>>8);for(var y=y0;y<y0+hh;y++)for(var b=0;b<bw;b++){var v=0;for(var i=0;i<8;i++){var j=(y*w+b*8+i)*4;if(p[j]*.3+p[j+1]*.59+p[j+2]*.11<140)v|=128>>i}o.push(v)}}
+o.push(27,100,4);return new Uint8Array(o)}
+var SV=["000018f0-0000-1000-8000-00805f9b34fb","0000ff00-0000-1000-8000-00805f9b34fb","0000ffe0-0000-1000-8000-00805f9b34fb","0000fff0-0000-1000-8000-00805f9b34fb","e7810a71-73ae-499d-8c15-faa9aef0c3f2","49535343-fe7d-4ae5-8fa9-9fafd205e455"];
+async function btCh(){if(BT&&BT.dev.gatt.connected)return BT.ch;var dev=BT?BT.dev:await navigator.bluetooth.requestDevice({acceptAllDevices:true,optionalServices:SV}),srv=await dev.gatt.connect(),ss=await srv.getPrimaryServices(),ch=null;
+for(var s of ss){var cs=await s.getCharacteristics();for(var c of cs)if(c.properties.writeWithoutResponse||c.properties.write){ch=c;break}if(ch)break}
+if(!ch)throw new Error("printer has no BLE write channel");BT={dev:dev,ch:ch};return ch}
+async function btSend(b){var ch=await btCh(),n=180,i=0,f=ch.properties.writeWithoutResponse?"writeValueWithoutResponse":"writeValue";
+while(i<b.length){try{await ch[f](b.slice(i,i+n));i+=n;await new Promise(function(r){setTimeout(r,12)})}catch(e){if(n>100)n=100;else if(n>20)n=20;else throw e}}}
+async function out(d){var c=drawSlip(d);
+if(S.pm==="bt"&&navigator.bluetooth){try{toast("Printing...");await btSend(rasterize(c));toast("Printed.");return}catch(e){toast("Bluetooth print failed ("+(e.message||e)+"). Using normal print.")}}
+if(S.pm==="rawbt"){var u=rasterize(c),s="";for(var i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));location.href="rawbt:base64,"+btoa(s);return}
+$("rc").innerHTML='<img style="width:100%" src="'+c.toDataURL("image/png")+'">';setTimeout(function(){window.print()},200)}
+function slip(d,rec){tok++;try{localStorage.setItem("gl_k",tok)}catch(e){}$("s-tok").value=tok+1;var n=new Date();d.tok=tok;d.date=n.toLocaleDateString("en-GB")+" "+n.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});d.shop=S.shop;d.addr=S.addr;d.ph=S.ph;d.foot=S.foot;if(rec){rec.slip=d;saveRec(rec,d.cust)}out(d)}
+var REC=[];try{REC=JSON.parse(localStorage.getItem("gl_rec")||"[]")}catch(e){}
+function persist(){try{localStorage.setItem("gl_rec",JSON.stringify(REC.slice(0,3000)))}catch(e){}}
+function api(){return SERVER.replace(/\/$/,"")+"/records"}
+function post(r){if(!SERVER||!JWT)return Promise.resolve(false);var c=Object.assign({},r);delete c.sent;delete c.slip;return fetch(api(),{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+JWT},body:JSON.stringify(c)}).then(function(x){if(x.status===401)logout();return x.ok}).catch(function(){return false})}
+function saveRec(rec,cu){rec.token=tok;rec.customer=cu||"";rec.shop=S.shop;rec.date=new Date().toISOString();rec.sent=false;REC.unshift(rec);persist();drawRec();post(rec).then(function(ok){if(ok){rec.sent=true;persist();drawRec()}})}
+function drawRec(){var q=($("r-q").value||"").toLowerCase(),h="";REC.forEach(function(r,i){if(q&&(r.customer||"").toLowerCase(<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gold Lab</title>
+<style>
+:root{--bg:#fbf4df;--cd:#fffdf5;--tx:#2e2208;--mu:#8a7240;--bd:#ead9a4;--ac:#a97709;--ac2:#e3b233;--er:#b3261e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding-bottom:90px}
+header{display:flex;align-items:center;gap:12px;padding:16px;max-width:640px;margin:0 auto}
+header img{height:44px;border-radius:8px}
+header h1{margin:0;font-size:1.25rem;color:var(--ac)}header small{color:var(--mu)}
+main{max-width:640px;margin:0 auto;padding:0 16px}
+.pg{display:none}.pg.on{display:block}
+.st{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:14px}
+.n{width:34px;height:34px;border-radius:50%;background:var(--ac);color:#fff;display:grid;place-items:center;font-weight:700;flex:none}
+.st label{font-size:.75rem;color:var(--mu);display:block}
+.st input{border:0;background:transparent;color:var(--tx);font-size:1.7rem;font-weight:600;width:100%;outline:none;padding:0}
+.f{margin-bottom:12px}.f label{display:block;font-size:.78rem;color:var(--mu);margin-bottom:4px}
+.f input,.f select{width:100%;padding:11px;font-size:1rem;border:1px solid var(--bd);border-radius:10px;background:var(--cd);color:var(--tx)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ch{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 14px}
+.ch button{flex:1;min-width:70px;padding:10px;border-radius:99px;border:1px solid var(--bd);background:var(--cd);color:var(--tx);font-size:.9rem;cursor:pointer}
+.ch button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.hero{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border-radius:18px;padding:18px;text-align:center;margin-bottom:12px}
+.hero b{font-size:2.4rem;display:block}.hero span{opacity:.9}
+.rs{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:6px 16px;margin-bottom:12px}
+.rs div{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--bd);font-size:.92rem}
+.rs div:last-child{border:0}.rs span{color:var(--mu)}.rs b{text-align:right}
+.btn{width:100%;padding:14px;border:0;border-radius:12px;background:var(--ac);color:#fff;font-size:1rem;font-weight:600;cursor:pointer}
+.er{color:var(--er);padding:10px 0}.nt{font-size:.78rem;color:var(--mu);margin:8px 0}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--cd);border-top:1px solid var(--bd);display:flex;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;padding:14px 4px;border:0;background:none;color:var(--mu);font-size:.85rem;cursor:pointer}
+nav button.on{color:var(--ac);font-weight:700}
+#rc{display:none}.tb{width:100%;border-collapse:collapse;background:var(--cd);border:1px solid var(--bd);border-radius:12px;margin-bottom:12px;font-size:.9rem}.tb th{color:var(--mu);font-weight:500;font-size:.75rem;padding:8px 4px}.tb td{padding:9px 4px;border-top:1px solid var(--bd);text-align:center}.tb td:first-child{text-align:left;padding-left:10px;color:var(--mu)}.tb tr.k td{font-weight:700;color:var(--tx)}
+@media print{@page{margin:0}body *{visibility:hidden}#rc,#rc *{visibility:visible}#rc{display:block;position:absolute;left:0;top:0;color:#000;background:#fff;font:12px monospace;padding:4px 6px}#rc hr{border:0;border-top:1px dashed #000}#rc td{padding:1px 0}}
+#gate{position:fixed;inset:0;z-index:50;background:var(--bg);display:none;align-items:center;justify-content:center;padding:20px}#gate .bx{width:100%;max-width:380px}
+header{max-width:none;margin:0 0 16px;padding:18px 18px 22px;background:linear-gradient(135deg,#5c3d04,#b8860b 60%,#e6b832);color:#fff;border-radius:0 0 24px 24px;box-shadow:0 6px 18px rgba(120,80,0,.25)}
+header h1{color:#fff;font-size:1.35rem;letter-spacing:.5px}header small{color:#ffe9a6}header img{background:#fff;padding:3px;border-radius:10px}
+.st{border-left:5px solid var(--ac2);box-shadow:0 2px 8px rgba(120,80,0,.08)}.n{background:linear-gradient(135deg,#b8860b,#e6b832)}
+.btn{background:linear-gradient(135deg,#9a6b08,#d4a017);box-shadow:0 3px 10px rgba(150,100,0,.3)}
+.hero{background:linear-gradient(135deg,#4a3003,#a67608 55%,#e6b832);box-shadow:0 6px 16px rgba(120,80,0,.3)}
+.rs,.tb{box-shadow:0 2px 8px rgba(120,80,0,.08)}.tb th{background:#f3e6b8;color:#5c3d04}
+.ch button.on{background:linear-gradient(135deg,#9a6b08,#d4a017);border-color:#b8860b}
+nav{background:#2e2208;border-top:0}nav button{color:#cdb67a}nav button.on{color:#ffd45c}
+</style></head><body>
+<header><img id="hl" alt="" style="display:none"><div><h1 id="hn">Gold Lab</h1><small id="hs"></small></div></header>
+<main>
+<section class="pg on" id="p-lab">
+<div class="st"><div class="n">1</div><div><label>Weight in Air (g)</label><input id="wa" type="number" step="0.001" inputmode="decimal" placeholder="0.000"></div></div>
+<div class="st"><div class="n">2</div><div><label>Weight in Water (g)</label><input id="ww" type="number" step="0.001" inputmode="decimal" placeholder="0.000"></div></div>
+<div class="st"><div class="n">3</div><div><label>Rate per Tola (Rs)</label><input id="rt" type="number" inputmode="numeric" placeholder="0"></div></div>
+<div class="ch" id="chl"></div><div class="g2"><div class="f"><label>Lab charge (Rs)</label><input id="lc" type="number" inputmode="numeric"></div><div class="f"><label>Charge per gram (Rs)</label><input id="pc" type="number" inputmode="numeric"></div></div>
+<div id="lo"></div>
+</section>
+<section class="pg" id="p-kaat">
+<p class="nt">Manual kaat: you decide how much kaat per tola. Weight is in grams, kaat in Aana and Ratti per tola.</p>
+<div class="st"><div class="n">1</div><div><label>Weight (g)</label><input id="kw" type="number" step="0.001" inputmode="decimal" placeholder="0.000"></div></div>
+<div class="st"><div class="n">2</div><div><label>Rate per Tola (Rs)</label><input id="kr" type="number" inputmode="numeric" placeholder="0"></div></div>
+<div class="st"><div class="n">3</div><div style="flex:1"><label>Kaat per Tola</label><div class="g2"><input id="ka" type="number" inputmode="decimal" placeholder="Aana"><input id="kt" type="number" inputmode="decimal" placeholder="Ratti"></div></div></div>
+<div id="ko"></div>
+</section>
+<section class="pg" id="p-rec"><div class="f"><input id="r-q" placeholder="Search customer name"></div><button class="btn" id="r-sync" style="background:var(--mu);margin-bottom:8px">Sync with server</button><div class="g2" style="margin-bottom:8px"><button class="btn" id="r-ex" style="background:var(--mu)">Backup (JSON)</button><button class="btn" id="r-cv" style="background:var(--mu)">Export CSV</button></div><div class="f"><label>Restore from backup file</label><input id="r-im" type="file" accept=".json"></div><p class="nt" id="r-msg"></p><div id="r-l"></div></section>
+<section class="pg" id="p-set">
+<div class="f"><label>Shop name</label><input id="s-shop"></div>
+<div class="f"><label>Address</label><input id="s-addr"></div>
+<div class="f"><label>Phone</label><input id="s-ph"></div>
+<div class="f"><label>Logo (image)</label><input id="s-logo" type="file" accept="image/*"><button class="btn" id="s-lx" style="margin-top:6px;background:var(--mu)">Remove logo</button></div>
+<div class="f"><label>Slip footer text</label><input id="s-foot"></div>
+<div class="g2"><div class="f"><label>Slip width</label><select id="s-pw"><option>58mm</option><option>80mm</option></select></div>
+<div class="f"><label>Default rate per tola (Rs)</label><input id="s-rate" type="number"></div></div><div class="f"><label>Print method</label><select id="s-pm"><option value="bt">Direct Bluetooth (BLE printer)</option><option value="rawbt">RawBT app (classic Bluetooth)</option><option value="browser">Browser print dialog</option></select></div>
+<div class="g2"><div class="f"><label>Water temperature</label><select id="s-tm"><option value="off">Ignore (1.000)</option><option value="on">Use correction</option></select></div>
+<div class="f"><label>Temperature (°C)</label><input id="s-t" type="number" step="0.5"></div></div>
+<button class="btn" id="lo-btn" style="background:var(--mu);margin-bottom:12px;display:none">Log out</button>
+<p class="nt">Alloy densities (g/cm³), editable:</p>
+<div class="g2"><div class="f"><label>Silver</label><input id="s-rs" type="number" step="0.01"></div><div class="f"><label>Copper</label><input id="s-rc" type="number" step="0.01"></div>
+<div class="f"><label>Standard</label><input id="s-st" type="number" step="0.01"></div><div class="f"><label>P_Silver</label><input id="s-ps" type="number" step="0.01"></div><div class="f"><label>Mix540</label><input id="s-mx" type="number" step="0.01"></div><div class="f"><label>Standard 1</label><input id="s-s1" type="number" step="0.001"></div><div class="f"><label>Standard 2</label><input id="s-s2" type="number" step="0.001"></div><div class="f"><label>Local 1</label><input id="s-l1" type="number" step="0.001"></div><div class="f"><label>False Gold</label><input id="s-fg" type="number" step="0.001"></div></div>
+<p class="nt"><b>Calibrate from your old software:</b> pick a type, enter the same air and water weights and the Ratti IN your old software shows. The density is worked out and filled in above. Then press Save Settings.</p>
+<div class="g2"><div class="f"><label>Type</label><select id="c-t"></select></div><div class="f"><label>Ratti IN (old software)</label><input id="c-r" type="number" step="0.01"></div><div class="f"><label>Air (g)</label><input id="c-a" type="number" step="0.001"></div><div class="f"><label>Water (g)</label><input id="c-w" type="number" step="0.001"></div></div><button class="btn" id="c-go" style="background:var(--mu);margin-bottom:6px">Calibrate</button><p class="nt" id="c-msg"></p>
+<div class="f"><label>Next token number</label><input id="s-tok" type="number"></div>
+<button class="btn" id="s-save">Save Settings</button><p class="nt" id="s-msg"></p>
+</section>
+</main>
+<div id="rc"></div>
+<div id="ts" style="position:fixed;left:12px;right:12px;bottom:84px;z-index:60;background:#2e2208;color:#fff;padding:10px 14px;border-radius:12px;display:none"></div>
+<div id="md" style="display:none;position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.55);overflow:auto;padding:14px"><div style="max-width:440px;margin:0 auto;background:var(--cd);border-radius:16px;padding:14px"><img id="md-i" alt="" style="width:100%;border:1px solid var(--bd);border-radius:8px;background:#fff"><p class="nt" id="md-n"></p><div class="f" style="margin-top:10px"><label>Customer name</label><input id="md-c"></div><div class="g2"><button class="btn" id="md-s">Save name</button><button class="btn" id="md-p">Print again</button><button class="btn" id="md-o" style="background:var(--mu)">Open in Lab</button><button class="btn" id="md-d" style="background:var(--er)">Delete</button></div><button class="btn" id="md-x" style="background:none;color:var(--mu);box-shadow:none">Close</button></div></div>
+<div id="gate"><div class="bx"><h1 style="color:var(--ac);text-align:center">Gold Lab</h1><div class="f"><label>Username</label><input id="g-u" autocomplete="username"></div><div class="f"><label>Password</label><input id="g-p" type="password" autocomplete="current-password"></div><div class="f" id="g-cw" style="display:none"><label>Invite code</label><input id="g-code"></div><button class="btn" id="g-go">Log in</button><p class="nt" id="g-m"></p><p class="nt" id="g-sw" style="text-align:center;cursor:pointer;color:var(--ac)">Have an invite? Register</p></div></div>
+<nav><button class="on" data-p="lab">Lab</button><button data-p="kaat">Kaat</button><button data-p="rec">Records</button><button data-p="set">Settings</button></nav>
+<script>
+var $=function(i){return document.getElementById(i)},RG=19.32,TG=11.664;
+var WT=[[10,.9997],[15,.9991],[20,.99821],[25,.99705],[30,.99565],[35,.99403],[40,.99222]];
+// ===== PUT YOUR SERVER URL HERE (example: https://goldlab-api.onrender.com). Leave empty for offline mode. =====
+var SERVER="";
+var D={shop:"Gold Lab",addr:"",ph:"",logo:"",foot:"Estimate only (density method)",pw:"80mm",rate:"",tm:"off",t:30,rs:10.49,rc:8.96,st:8.96,ps:10.09,mx:9.98,s1:8.96,s2:9.66,l1:9.98,fg:8.5,pm:"bt"},S={},tok=0,al="st";
+try{S=JSON.parse(localStorage.getItem("gl_s")||"{}");tok=+localStorage.getItem("gl_k")||0}catch(e){}
+for(var k in D)if(S[k]===undefined)S[k]=D[k];
+var AL={st:"Standard",rs:"Silver",rc:"Copper",ps:"P_Silver",mx:"Mix540",s1:"Standard 1",s2:"Standard 2",l1:"Local 1",fg:"False Gold"};
+function wd(t){t=Math.max(10,Math.min(40,t));for(var i=0;i<6;i++){var a=WT[i],b=WT[i+1];if(t<=b[0])return a[1]+(b[1]-a[1])*(t-a[0])/(b[0]-a[0])}return .99222}
+function tarN(g){var r=Math.round(g/TG*96*100)/100,t=Math.floor(r/96);r-=t*96;var a=Math.floor(r/6);r=Math.round((r-a*6)*100)/100;if(r>=6){a++;r=0}return[t,a,r.toFixed(2)]}
+function tar(g){var q=tarN(g);return q[0]+"T "+q[1]+"A "+q[2]+"R"}
+function fm(n){return"Rs "+Math.round(n).toLocaleString("en-PK")}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function head(){$("hn").textContent=S.shop||"Gold Lab";$("hs").textContent=[S.addr,S.ph].filter(Boolean).join(" · ");var l=$("hl");l.style.display=S.logo?"block":"none";l.src=S.logo||"";LOGO=null;if(S.logo){LOGO=new Image();LOGO.src=S.logo}}
+function show(el,rows,hero,title,cu){
+var h=hero?'<div class="hero"><b>'+hero[0]+'</b><span>'+hero[1]+'</span></div>':"";
+el.innerHTML=h+'<div class="rs">'+rows.map(function(r){return"<div><span>"+r[0]+"</span><b>"+r[1]+"</b></div>"}).join("")+'</div><button class="btn" id="pb">Print Slip</button>';
+$("pb").onclick=function(){slip(title,rows,cu?cu.value:"")}}
+var LOGO=null,BT=null,tt=0;
+function toast(t){var e=$("ts");e.textContent=t;e.style.display="block";clearTimeout(tt);tt=setTimeout(function(){e.style.display="none"},5000)}
+function drawSlip(d){var W=S.pw==="58mm"?384:576,k=W/384,c=document.createElement("canvas");c.width=W;c.height=Math.round(2000*k);var x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,W,c.height);x.fillStyle=x.strokeStyle="#000";x.textBaseline="middle";
+var m=12*k,iw=W-2*m,y=m+4*k,i;
+function T(t,px,xx,yy,al,b,mw){x.font=(b?"bold ":"")+px*k+"px sans-serif";x.textAlign=al;x.fillText(t,xx,yy,mw)}
+function B(y1,h,w){x.lineWidth=(w||2)*k;x.strokeRect(m,y1,iw,h)}
+if(LOGO&&LOGO.complete&&LOGO.naturalWidth){var lh=54*k,lw=LOGO.naturalWidth*lh/LOGO.naturalHeight;if(lw>iw*.6){lw=iw*.6;lh=lw*LOGO.naturalHeight/LOGO.naturalWidth}x.drawImage(LOGO,(W-lw)/2,y,lw,lh);y+=lh+4*k}
+y+=14*k;T(d.shop||"",26,W/2,y,"center",1,iw);y+=24*k;
+if(d.addr){T(d.addr,15,W/2,y,"center",0,iw);y+=19*k}
+if(d.ph){T(d.ph,15,W/2,y,"center",1,iw);y+=19*k}
+y+=6*k;x.fillRect(m,y,iw,30*k);x.fillStyle="#fff";T(d.title,19,W/2,y+16*k,"center",1);x.fillStyle="#000";y+=30*k;
+B(y,28*k);x.beginPath();x.moveTo(W*.38,y);x.lineTo(W*.38,y+28*k);x.stroke();
+T("#"+d.tok,17,(m+W*.38)/2,y+15*k,"center",1);T(d.date,14,(W*.38+W-m)/2,y+15*k,"center",0,W*.62-m-8*k);y+=28*k;
+if(d.cust){B(y,28*k);T("Customer: "+d.cust,16,m+6*k,y+15*k,"left",1,iw-12*k);y+=28*k}
+y+=10*k;
+if(d.big){B(y,66*k,4);B(y+5*k,56*k,1.5);T(d.big[0],14,W/2,y+17*k,"center",0);T(d.big[1],34,W/2,y+43*k,"center",1,iw-20*k);y+=66*k;if(d.sub){T(d.sub,14,W/2,y+14*k,"center",0,iw);y+=26*k}y+=8*k}
+if(d.cols){var fr=[.3,.14,.15,.15,.26],xs=[m],rh=28*k;fr.forEach(function(f,n){xs.push(xs[n]+f*iw)});
+var row=function(r,hd,bd){if(hd){x.fillRect(m,y,iw,rh);x.fillStyle="#fff"}r.forEach(function(v,n){var cx=xs[n],cw=xs[n+1]-cx;T(String(v),n?15:13,n?cx+cw/2:cx+4*k,y+rh/2,n?"center":"left",hd||bd||!n,cw-6*k)});x.fillStyle="#000";x.lineWidth=1.5*k;for(i=0;i<5;i++)x.strokeRect(xs[i],y,xs[i+1]-xs[i],rh);y+=rh};
+row(d.cols,1);d.rows.forEach(function(r,n){row(r,0,n===d.rows.length-1)});y+=10*k}
+d.kv.forEach(function(r){var h=30*k;if(r[2]){x.fillRect(m,y,iw,h);x.fillStyle="#fff"}T(r[0],15,m+6*k,y+h/2,"left",1,iw*.5-10*k);T(String(r[1]),16,m+iw*.75,y+h/2,"center",1,iw*.5-8*k);x.fillStyle="#000";B(y,h,1.5);x.beginPath();x.moveTo(m+iw*.5,y);x.lineTo(m+iw*.5,y+h);x.stroke();y+=h});
+y+=12*k;x.setLineDash([8*k,5*k]);x.lineWidth=2*k;x.beginPath();x.moveTo(m,y);x.lineTo(W-m,y);x.stroke();x.setLineDash([]);y+=18*k;T(d.foot||"",13,W/2,y,"center",0,iw);y+=20*k;T("* Thank you *",15,W/2,y,"center",1);y+=26*k;
+var o=document.createElement("canvas");o.width=W;o.height=Math.round(y+8*k);var q=o.getContext("2d");q.fillStyle="#fff";q.fillRect(0,0,W,o.height);q.drawImage(c,0,0);q.strokeStyle="#000";q.lineWidth=3*k;q.strokeRect(2*k,2*k,W-4*k,o.height-4*k);q.lineWidth=k;q.strokeRect(5.5*k,5.5*k,W-11*k,o.height-11*k);return o}
+function rasterize(c){var w=c.width,h=c.height,p=c.getContext("2d").getImageData(0,0,w,h).data,bw=w/8,o=[27,64];
+for(var y0=0;y0<h;y0+=96){var hh=Math.min(96,h-y0);o.push(29,118,48,0,bw&255,bw>>8,hh&255,hh>>8);for(var y=y0;y<y0+hh;y++)for(var b=0;b<bw;b++){var v=0;for(var i=0;i<8;i++){var j=(y*w+b*8+i)*4;if(p[j]*.3+p[j+1]*.59+p[j+2]*.11<140)v|=128>>i}o.push(v)}}
+o.push(27,100,4);return new Uint8Array(o)}
+var SV=["000018f0-0000-1000-8000-00805f9b34fb","0000ff00-0000-1000-8000-00805f9b34fb","0000ffe0-0000-1000-8000-00805f9b34fb","0000fff0-0000-1000-8000-00805f9b34fb","e7810a71-73ae-499d-8c15-faa9aef0c3f2","49535343-fe7d-4ae5-8fa9-9fafd205e455"];
+async function btCh(){if(BT&&BT.dev.gatt.connected)return BT.ch;var dev=BT?BT.dev:await navigator.bluetooth.requestDevice({acceptAllDevices:true,optionalServices:SV}),srv=await dev.gatt.connect(),ss=await srv.getPrimaryServices(),ch=null;
+for(var s of ss){var cs=await s.getCharacteristics();for(var c of cs)if(c.properties.writeWithoutResponse||c.properties.write){ch=c;break}if(ch)break}
+if(!ch)throw new Error("printer has no BLE write channel");BT={dev:dev,ch:ch};return ch}
+async function btSend(b){var ch=await btCh(),n=180,i=0,f=ch.properties.writeWithoutResponse?"writeValueWithoutResponse":"writeValue";
+while(i<b.length){try{await ch[f](b.slice(i,i+n));i+=n;await new Promise(function(r){setTimeout(r,12)})}catch(e){if(n>100)n=100;else if(n>20)n=20;else throw e}}}
+async function out(d){var c=drawSlip(d);
+if(S.pm==="bt"&&navigator.bluetooth){try{toast("Printing...");await btSend(rasterize(c));toast("Printed.");return}catch(e){toast("Bluetooth print failed ("+(e.message||e)+"). Using normal print.")}}
+if(S.pm==="rawbt"){var u=rasterize(c),s="";for(var i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));location.href="rawbt:base64,"+btoa(s);return}
+$("rc").innerHTML='<img style="width:100%" src="'+c.toDataURL("image/png")+'">';setTimeout(function(){window.print()},200)}
+function slip(d,rec){tok++;try{localStorage.setItem("gl_k",tok)}catch(e){}$("s-tok").value=tok+1;var n=new Date();d.tok=tok;d.date=n.toLocaleDateString("en-GB")+" "+n.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});d.shop=S.shop;d.addr=S.addr;d.ph=S.ph;d.foot=S.foot;if(rec){rec.slip=d;saveRec(rec,d.cust)}out(d)}
+var REC=[];try{REC=JSON.parse(localStorage.getItem("gl_rec")||"[]")}catch(e){}
+function persist(){try{localStorage.setItem("gl_rec",JSON.stringify(REC.slice(0,3000)))}catch(e){}}
+function api(){return SERVER.replace(/\/$/,"")+"/records"}
+function post(r){if(!SERVER||!JWT)return Promise.resolve(false);var c=Object.assign({},r);delete c.sent;delete c.slip;return fetch(api(),{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+JWT},body:JSON.stringify(c)}).then(function(x){if(x.status===401)logout();return x.ok}).catch(function(){return false})}
+function saveRec(rec,cu){rec.token=tok;rec.customer=cu||"";rec.shop=S.shop;rec.date=new Date().toISOString();rec.sent=false;REC.unshift(rec);persist();drawRec();post(rec).then(function(ok){if(ok){rec.sent=true;persist();drawRec()}})}
+function drawRec(){var q=($("r-q").value||"").toLowerCase(),h="";REC.forEach(function(r,i){if(q&&(r.customer||"").toLowerCase(<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gold Lab</title>
+<style>
+:root{--bg:#fbf4df;--cd:#fffdf5;--tx:#2e2208;--mu:#8a7240;--bd:#ead9a4;--ac:#a97709;--ac2:#e3b233;--er:#b3261e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding-bottom:90px}
+header{display:flex;align-items:center;gap:12px;padding:16px;max-width:640px;margin:0 auto}
+header img{height:44px;border-radius:8px}
+header h1{margin:0;font-size:1.25rem;color:var(--ac)}header small{color:var(--mu)}
+main{max-width:640px;margin:0 auto;padding:0 16px}
+.pg{display:none}.pg.on{display:block}
+.st{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:14px}
+.n{width:34px;height:34px;border-radius:50%;background:var(--ac);color:#fff;display:grid;place-items:center;font-weight:700;flex:none}
+.st label{font-size:.75rem;color:var(--mu);display:block}
+.st input{border:0;background:transparent;color:var(--tx);font-size:1.7rem;font-weight:600;width:100%;outline:none;padding:0}
+.f{margin-bottom:12px}.f label{display:block;font-size:.78rem;color:var(--mu);margin-bottom:4px}
+.f input,.f select{width:100%;padding:11px;font-size:1rem;border:1px solid var(--bd);border-radius:10px;background:var(--cd);color:var(--tx)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ch{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 14px}
+.ch button{flex:1;min-width:70px;padding:10px;border-radius:99px;border:1px solid var(--bd);background:var(--cd);color:var(--tx);font-size:.9rem;cursor:pointer}
+.ch button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.hero{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border-radius:18px;padding:18px;text-align:center;margin-bottom:12px}
+.hero b{font-size:2.4rem;display:block}.hero span{opacity:.9}
+.rs{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:6px 16px;margin-bottom:12px}
+.rs div{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--bd);font-size:.92rem}
+.rs div:last-child{border:0}.rs span{color:var(--mu)}.rs b{text-align:right}
+.btn{width:100%;padding:14px;border:0;border-radius:12px;background:var(--ac);color:#fff;font-size:1rem;font-weight:600;cursor:pointer}
+.er{color:var(--er);padding:10px 0}.nt{font-size:.78rem;color:var(--mu);margin:8px 0}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--cd);border-top:1px solid var(--bd);display:flex;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;padding:14px 4px;border:0;background:none;color:var(--mu);font-size:.85rem;cursor:pointer}
+nav button.on{color:var(--ac);font-weight:700}
+#rc{display:none}.tb{width:100%;border-collapse:collapse;background:var(--cd);border:1px solid var(--bd);border-radius:12px;margin-bottom:12px;font-size:.9rem}.tb th{color:var(--mu);font-weight:500;font-size:.75rem;padding:8px 4px}.tb td{padding:9px 4px;border-top:1px solid var(--bd);text-align:center}.tb td:first-child{text-align:left;padding-left:10px;color:var(--mu)}.tb tr.k td{font-weight:700;color:var(--tx)}
+@media print{@page{margin:0}body *{visibility:hidden}#rc,#rc *{visibility:visible}#rc{display:block;position:absolute;left:0;top:0;color:#000;background:#fff;font:12px monospace;padding:4px 6px}#rc hr{border:0;border-top:1px dashed #000}#rc td{padding:1px 0}}
+#gate{position:fixed;inset:0;z-index:50;background:var(--bg);display:none;align-items:center;justify-content:center;padding:20px}#gate .bx{width:100%;max-width:380px}
+header{max-width:none;margin:0 0 16px;padding:18px 18px 22px;background:linear-gradient(135deg,#5c3d04,#b8860b 60%,#e6b832);color:#fff;border-radius:0 0 24px 24px;box-shadow:0 6px 18px rgba(120,80,0,.25)}
+header h1{color:#fff;font-size:1.35rem;letter-spacing:.5px}header small{color:#ffe9a6}header img{background:#fff;padding:3px;border-radius:10px}
+.st{border-left:5px solid var(--ac2);box-shadow:0 2px 8px rgba(120,80,0,.08)}.n{background:linear-gradient(135deg,#b8860b,#e6b832)}
+.btn{background:linear-gradient(135deg,#9a6b08,#d4a017);box-shadow:0 3px 10px rgba(150,100,0,.3)}
+.hero{background:linear-gradient(135deg,#4a3003,#a67608 55%,#e6b832);box-shadow:0 6px 16px rgba(120,80,0,.3)}
+.rs,.tb{box-shadow:0 2px 8px rgba(120,80,0,.08)}.tb th{background:#f3e6b8;color:#5c3d04}
+.ch button.on{background:linear-gradient(135deg,#9a6b08,#d4a017);border-color:#b8860b}
+nav{background:#2e2208;border-top:0}nav button{color:#cdb67a}nav button.on{color:#ffd45c}
+</style></head><body>
+<header><img id="hl" alt="" style="display:none"><div><h1 id="hn">Gold Lab</h1><small id="hs"></small></div></header>
+<main>
+<section class="pg on" id="p-lab">
+<div class="st"><div class="n">1</div><div><label>Weight in Air (g)</label><input id="wa" type="number" step="0.001" inputmode="decimal" placeholder="0.000"></div></div>
+<div class="st"><div class="n">2</div><div><label>Weight in Water (g)</label><input id="ww" type="number" step="0.001" inputmode="decimal" placeholder="0.000"></div></div>
+<div class="st"><div class="n">3</div><div><label>Rate per Tola (Rs)</label><input id="rt" type="number" inputmode="numeric" placeholder="0"></div></div>
+<div class="ch" id="chl"></div><div class="g2"><div class="f"><label>Lab charge (Rs)</label><input id="lc" type="number" inputmode="numeric"></div><div class="f"><label>Charge per gram (Rs)</label><input id="pc" type="number" inputmode="numeric"></div></div>
+<div id="lo"></div>
+</section>
+<section class="pg" id="p-kaat">
+<p class="nt">Manual kaat: you decide how much kaat per tola. Weight is in grams, kaat in Aana and Ratti per tola.</p>
+<div class="st"><div class="n">1</div><div><label>Weight (g)</label><input id="kw" type="number" step="0.001" inputmode="decimal" placeholder="0.000"></div></div>
+<div class="st"><div class="n">2</div><div><label>Rate per Tola (Rs)</label><input id="kr" type="number" inputmode="numeric" placeholder="0"></div></div>
+<div class="st"><div class="n">3</div><div style="flex:1"><label>Kaat per Tola</label><div class="g2"><input id="ka" type="number" inputmode="decimal" placeholder="Aana"><input id="kt" type="number" inputmode="decimal" placeholder="Ratti"></div></div></div>
+<div id="ko"></div>
+</section>
+<section class="pg" id="p-rec"><div class="f"><input id="r-q" placeholder="Search customer name"></div><button class="btn" id="r-sync" style="background:var(--mu);margin-bottom:8px">Sync with server</button><div class="g2" style="margin-bottom:8px"><button class="btn" id="r-ex" style="background:var(--mu)">Backup (JSON)</button><button class="btn" id="r-cv" style="background:var(--mu)">Export CSV</button></div><div class="f"><label>Restore from backup file</label><input id="r-im" type="file" accept=".json"></div><p class="nt" id="r-msg"></p><div id="r-l"></div></section>
+<section class="pg" id="p-set">
+<div class="f"><label>Shop name</label><input id="s-shop"></div>
+<div class="f"><label>Address</label><input id="s-addr"></div>
+<div class="f"><label>Phone</label><input id="s-ph"></div>
+<div class="f"><label>Logo (image)</label><input id="s-logo" type="file" accept="image/*"><button class="btn" id="s-lx" style="margin-top:6px;background:var(--mu)">Remove logo</button></div>
+<div class="f"><label>Slip footer text</label><input id="s-foot"></div>
+<div class="g2"><div class="f"><label>Slip width</label><select id="s-pw"><option>58mm</option><option>80mm</option></select></div>
+<div class="f"><label>Default rate per tola (Rs)</label><input id="s-rate" type="number"></div></div><div class="f"><label>Print method</label><select id="s-pm"><option value="bt">Direct Bluetooth (BLE printer)</option><option value="rawbt">RawBT app (classic Bluetooth)</option><option value="browser">Browser print dialog</option></select></div>
+<div class="g2"><div class="f"><label>Water temperature</label><select id="s-tm"><option value="off">Ignore (1.000)</option><option value="on">Use correction</option></select></div>
+<div class="f"><label>Temperature (°C)</label><input id="s-t" type="number" step="0.5"></div></div>
+<button class="btn" id="lo-btn" style="background:var(--mu);margin-bottom:12px;display:none">Log out</button>
+<p class="nt">Alloy densities (g/cm³), editable:</p>
+<div class="g2"><div class="f"><label>Silver</label><input id="s-rs" type="number" step="0.01"></div><div class="f"><label>Copper</label><input id="s-rc" type="number" step="0.01"></div>
+<div class="f"><label>Standard</label><input id="s-st" type="number" step="0.01"></div><div class="f"><label>P_Silver</label><input id="s-ps" type="number" step="0.01"></div><div class="f"><label>Mix540</label><input id="s-mx" type="number" step="0.01"></div><div class="f"><label>Standard 1</label><input id="s-s1" type="number" step="0.001"></div><div class="f"><label>Standard 2</label><input id="s-s2" type="number" step="0.001"></div><div class="f"><label>Local 1</label><input id="s-l1" type="number" step="0.001"></div><div class="f"><label>False Gold</label><input id="s-fg" type="number" step="0.001"></div></div>
+<p class="nt"><b>Calibrate from your old software:</b> pick a type, enter the same air and water weights and the Ratti IN your old software shows. The density is worked out and filled in above. Then press Save Settings.</p>
+<div class="g2"><div class="f"><label>Type</label><select id="c-t"></select></div><div class="f"><label>Ratti IN (old software)</label><input id="c-r" type="number" step="0.01"></div><div class="f"><label>Air (g)</label><input id="c-a" type="number" step="0.001"></div><div class="f"><label>Water (g)</label><input id="c-w" type="number" step="0.001"></div></div><button class="btn" id="c-go" style="background:var(--mu);margin-bottom:6px">Calibrate</button><p class="nt" id="c-msg"></p>
+<div class="f"><label>Next token number</label><input id="s-tok" type="number"></div>
+<button class="btn" id="s-save">Save Settings</button><p class="nt" id="s-msg"></p>
+</section>
+</main>
+<div id="rc"></div>
+<div id="ts" style="position:fixed;left:12px;right:12px;bottom:84px;z-index:60;background:#2e2208;color:#fff;padding:10px 14px;border-radius:12px;display:none"></div>
+<div id="md" style="display:none;position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.55);overflow:auto;padding:14px"><div style="max-width:440px;margin:0 auto;background:var(--cd);border-radius:16px;padding:14px"><img id="md-i" alt="" style="width:100%;border:1px solid var(--bd);border-radius:8px;background:#fff"><p class="nt" id="md-n"></p><div class="f" style="margin-top:10px"><label>Customer name</label><input id="md-c"></div><div class="g2"><button class="btn" id="md-s">Save name</button><button class="btn" id="md-p">Print again</button><button class="btn" id="md-o" style="background:var(--mu)">Open in Lab</button><button class="btn" id="md-d" style="background:var(--er)">Delete</button></div><button class="btn" id="md-x" style="background:none;color:var(--mu);box-shadow:none">Close</button></div></div>
+<div id="gate"><div class="bx"><h1 style="color:var(--ac);text-align:center">Gold Lab</h1><div class="f"><label>Username</label><input id="g-u" autocomplete="username"></div><div class="f"><label>Password</label><input id="g-p" type="password" autocomplete="current-password"></div><div class="f" id="g-cw" style="display:none"><label>Invite code</label><input id="g-code"></div><button class="btn" id="g-go">Log in</button><p class="nt" id="g-m"></p><p class="nt" id="g-sw" style="text-align:center;cursor:pointer;color:var(--ac)">Have an invite? Register</p></div></div>
+<nav><button class="on" data-p="lab">Lab</button><button data-p="kaat">Kaat</button><button data-p="rec">Records</button><button data-p="set">Settings</button></nav>
+<script>
+var $=function(i){return document.getElementById(i)},RG=19.32,TG=11.664;
+var WT=[[10,.9997],[15,.9991],[20,.99821],[25,.99705],[30,.99565],[35,.99403],[40,.99222]];
+// ===== PUT YOUR SERVER URL HERE (example: https://goldlab-api.onrender.com). Leave empty for offline mode. =====
+var SERVER="";
+var D={shop:"Gold Lab",addr:"",ph:"",logo:"",foot:"Estimate only (density method)",pw:"80mm",rate:"",tm:"off",t:30,rs:10.49,rc:8.96,st:8.96,ps:10.09,mx:9.98,s1:8.96,s2:9.66,l1:9.98,fg:8.5,pm:"bt"},S={},tok=0,al="st";
+try{S=JSON.parse(localStorage.getItem("gl_s")||"{}");tok=+localStorage.getItem("gl_k")||0}catch(e){}
+for(var k in D)if(S[k]===undefined)S[k]=D[k];
+var AL={st:"Standard",rs:"Silver",rc:"Copper",ps:"P_Silver",mx:"Mix540",s1:"Standard 1",s2:"Standard 2",l1:"Local 1",fg:"False Gold"};
+function wd(t){t=Math.max(10,Math.min(40,t));for(var i=0;i<6;i++){var a=WT[i],b=WT[i+1];if(t<=b[0])return a[1]+(b[1]-a[1])*(t-a[0])/(b[0]-a[0])}return .99222}
+function tarN(g){var r=Math.round(g/TG*96*100)/100,t=Math.floor(r/96);r-=t*96;var a=Math.floor(r/6);r=Math.round((r-a*6)*100)/100;if(r>=6){a++;r=0}return[t,a,r.toFixed(2)]}
+function tar(g){var q=tarN(g);return q[0]+"T "+q[1]+"A "+q[2]+"R"}
+function fm(n){return"Rs "+Math.round(n).toLocaleString("en-PK")}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function head(){$("hn").textContent=S.shop||"Gold Lab";$("hs").textContent=[S.addr,S.ph].filter(Boolean).join(" · ");var l=$("hl");l.style.display=S.logo?"block":"none";l.src=S.logo||"";LOGO=null;if(S.logo){LOGO=new Image();LOGO.src=S.logo}}
+function show(el,rows,hero,title,cu){
+var h=hero?'<div class="hero"><b>'+hero[0]+'</b><span>'+hero[1]+'</span></div>':"";
+el.innerHTML=h+'<div class="rs">'+rows.map(function(r){return"<div><span>"+r[0]+"</span><b>"+r[1]+"</b></div>"}).join("")+'</div><button class="btn" id="pb">Print Slip</button>';
+$("pb").onclick=function(){slip(title,rows,cu?cu.value:"")}}
+var LOGO=null,BT=null,tt=0;
+function toast(t){var e=$("ts");e.textContent=t;e.style.display="block";clearTimeout(tt);tt=setTimeout(function(){e.style.display="none"},5000)}
+function drawSlip(d){var W=S.pw==="58mm"?384:576,k=W/384,c=document.createElement("canvas");c.width=W;c.height=Math.round(2000*k);var x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,W,c.height);x.fillStyle=x.strokeStyle="#000";x.textBaseline="middle";
+var m=12*k,iw=W-2*m,y=m+4*k,i;
+function T(t,px,xx,yy,al,b,mw){x.font=(b?"bold ":"")+px*k+"px sans-serif";x.textAlign=al;x.fillText(t,xx,yy,mw)}
+function B(y1,h,w){x.lineWidth=(w||2)*k;x.strokeRect(m,y1,iw,h)}
+if(LOGO&&LOGO.complete&&LOGO.naturalWidth){var lh=54*k,lw=LOGO.naturalWidth*lh/LOGO.naturalHeight;if(lw>iw*.6){lw=iw*.6;lh=lw*LOGO.naturalHeight/LOGO.naturalWidth}x.drawImage(LOGO,(W-lw)/2,y,lw,lh);y+=lh+4*k}
+y+=14*k;T(d.shop||"",26,W/2,y,"center",1,iw);y+=24*k;
+if(d.addr){T(d.addr,15,W/2,y,"center",0,iw);y+=19*k}
+if(d.ph){T(d.ph,15,W/2,y,"center",1,iw);y+=19*k}
+y+=6*k;x.fillRect(m,y,iw,30*k);x.fillStyle="#fff";T(d.title,19,W/2,y+16*k,"center",1);x.fillStyle="#000";y+=30*k;
+B(y,28*k);x.beginPath();x.moveTo(W*.38,y);x.lineTo(W*.38,y+28*k);x.stroke();
+T("#"+d.tok,17,(m+W*.38)/2,y+15*k,"center",1);T(d.date,14,(W*.38+W-m)/2,y+15*k,"center",0,W*.62-m-8*k);y+=28*k;
+if(d.cust){B(y,28*k);T("Customer: "+d.cust,16,m+6*k,y+15*k,"left",1,iw-12*k);y+=28*k}
+y+=10*k;
+if(d.big){B(y,66*k,4);B(y+5*k,56*k,1.5);T(d.big[0],14,W/2,y+17*k,"center",0);T(d.big[1],34,W/2,y+43*k,"center",1,iw-20*k);y+=66*k;if(d.sub){T(d.sub,14,W/2,y+14*k,"center",0,iw);y+=26*k}y+=8*k}
+if(d.cols){var fr=[.3,.14,.15,.15,.26],xs=[m],rh=28*k;fr.forEach(function(f,n){xs.push(xs[n]+f*iw)});
+var row=function(r,hd,bd){if(hd){x.fillRect(m,y,iw,rh);x.fillStyle="#fff"}r.forEach(function(v,n){var cx=xs[n],cw=xs[n+1]-cx;T(String(v),n?15:13,n?cx+cw/2:cx+4*k,y+rh/2,n?"center":"left",hd||bd||!n,cw-6*k)});x.fillStyle="#000";x.lineWidth=1.5*k;for(i=0;i<5;i++)x.strokeRect(xs[i],y,xs[i+1]-xs[i],rh);y+=rh};
+row(d.cols,1);d.rows.forEach(function(r,n){row(r,0,n===d.rows.length-1)});y+=10*k}
+d.kv.forEach(function(r){var h=30*k;if(r[2]){x.fillRect(m,y,iw,h);x.fillStyle="#fff"}T(r[0],15,m+6*k,y+h/2,"left",1,iw*.5-10*k);T(String(r[1]),16,m+iw*.75,y+h/2,"center",1,iw*.5-8*k);x.fillStyle="#000";B(y,h,1.5);x.beginPath();x.moveTo(m+iw*.5,y);x.lineTo(m+iw*.5,y+h);x.stroke();y+=h});
+y+=12*k;x.setLineDash([8*k,5*k]);x.lineWidth=2*k;x.beginPath();x.moveTo(m,y);x.lineTo(W-m,y);x.stroke();x.setLineDash([]);y+=18*k;T(d.foot||"",13,W/2,y,"center",0,iw);y+=20*k;T("* Thank you *",15,W/2,y,"center",1);y+=26*k;
+var o=document.createElement("canvas");o.width=W;o.height=Math.round(y+8*k);var q=o.getContext("2d");q.fillStyle="#fff";q.fillRect(0,0,W,o.height);q.drawImage(c,0,0);q.strokeStyle="#000";q.lineWidth=3*k;q.strokeRect(2*k,2*k,W-4*k,o.height-4*k);q.lineWidth=k;q.strokeRect(5.5*k,5.5*k,W-11*k,o.height-11*k);return o}
+function rasterize(c){var w=c.width,h=c.height,p=c.getContext("2d").getImageData(0,0,w,h).data,bw=w/8,o=[27,64];
+for(var y0=0;y0<h;y0+=96){var hh=Math.min(96,h-y0);o.push(29,118,48,0,bw&255,bw>>8,hh&255,hh>>8);for(var y=y0;y<y0+hh;y++)for(var b=0;b<bw;b++){var v=0;for(var i=0;i<8;i++){var j=(y*w+b*8+i)*4;if(p[j]*.3+p[j+1]*.59+p[j+2]*.11<140)v|=128>>i}o.push(v)}}
+o.push(27,100,4);return new Uint8Array(o)}
+var SV=["000018f0-0000-1000-8000-00805f9b34fb","0000ff00-0000-1000-8000-00805f9b34fb","0000ffe0-0000-1000-8000-00805f9b34fb","0000fff0-0000-1000-8000-00805f9b34fb","e7810a71-73ae-499d-8c15-faa9aef0c3f2","49535343-fe7d-4ae5-8fa9-9fafd205e455"];
+async function btCh(){if(BT&&BT.dev.gatt.connected)return BT.ch;var dev=BT?BT.dev:await navigator.bluetooth.requestDevice({acceptAllDevices:true,optionalServices:SV}),srv=await dev.gatt.connect(),ss=await srv.getPrimaryServices(),ch=null;
+for(var s of ss){var cs=await s.getCharacteristics();for(var c of cs)if(c.properties.writeWithoutResponse||c.properties.write){ch=c;break}if(ch)break}
+if(!ch)throw new Error("printer has no BLE write channel");BT={dev:dev,ch:ch};return ch}
+async function btSend(b){var ch=await btCh(),n=180,i=0,f=ch.properties.writeWithoutResponse?"writeValueWithoutResponse":"writeValue";
+while(i<b.length){try{await ch[f](b.slice(i,i+n));i+=n;await new Promise(function(r){setTimeout(r,12)})}catch(e){if(n>100)n=100;else if(n>20)n=20;else throw e}}}
+async function out(d){var c=drawSlip(d);
+if(S.pm==="bt"&&navigator.bluetooth){try{toast("Printing...");await btSend(rasterize(c));toast("Printed.");return}catch(e){toast("Bluetooth print failed ("+(e.message||e)+"). Using normal print.")}}
+if(S.pm==="rawbt"){var u=rasterize(c),s="";for(var i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));location.href="rawbt:base64,"+btoa(s);return}
+$("rc").innerHTML='<img style="width:100%" src="'+c.toDataURL("image/png")+'">';setTimeout(function(){window.print()},200)}
+function slip(d,rec){tok++;try{localStorage.setItem("gl_k",tok)}catch(e){}$("s-tok").value=tok+1;var n=new Date();d.tok=tok;d.date=n.toLocaleDateString("en-GB")+" "+n.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});d.shop=S.shop;d.addr=S.addr;d.ph=S.ph;d.foot=S.foot;if(rec){rec.slip=d;saveRec(rec,d.cust)}out(d)}
+var REC=[];try{REC=JSON.parse(localStorage.getItem("gl_rec")||"[]")}catch(e){}
+function persist(){try{localStorage.setItem("gl_rec",JSON.stringify(REC.slice(0,3000)))}catch(e){}}
+function api(){return SERVER.replace(/\/$/,"")+"/records"}
+function post(r){if(!SERVER||!JWT)return Promise.resolve(false);var c=Object.assign({},r);delete c.sent;delete c.slip;return fetch(api(),{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+JWT},body:JSON.stringify(c)}).then(function(x){if(x.status===401)logout();return x.ok}).catch(function(){return false})}
+function saveRec(rec,cu){rec.token=tok;rec.customer=cu||"";rec.shop=S.shop;rec.date=new Date().toISOString();rec.sent=false;REC.unshift(rec);persist();drawRec();post(rec).then(function(ok){if(ok){rec.sent=true;persist();drawRec()}})}
+function drawRec(){var q=($("r-q").value||"").toLowerCase(),h="";REC.forEach(function(r,i){if(q&&(r.customer||"").toLowerCase(<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gold Lab</title>
+<style>
+:root{--bg:#fbf4df;--cd:#fffdf5;--tx:#2e2208;--mu:#8a7240;--bd:#ead9a4;--ac:#a97709;--ac2:#e3b233;--er:#b3261e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding-bottom:90px}
+header{display:flex;align-items:center;gap:12px;padding:16px;max-width:640px;margin:0 auto}
+header img{height:44px;border-radius:8px}
+header h1{margin:0;font-size:1.25rem;color:var(--ac)}header small{color:var(--mu)}
+main{max-width:640px;margin:0 auto;padding:0 16px}
+.pg{display:none}.pg.on{display:block}
+.st{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:14px}
+.n{width:34px;height:34px;border-radius:50%;background:var(--ac);color:#fff;display:grid;place-items:center;font-weight:700;flex:none}
+.st label{font-size:.75rem;color:var(--mu);display:block}
+.st input{border:0;background:transparent;color:var(--tx);font-size:1.7rem;font-weight:600;width:100%;outline:none;padding:0}
+.f{margin-bottom:12px}.f label{display:block;font-size:.78rem;color:var(--mu);margin-bottom:4px}
+.f input,.f select{width:100%;padding:11px;font-size:1rem;border:1px solid var(--bd);border-radius:10px;background:var(--cd);color:var(--tx)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ch{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 14px}
+.ch button{flex:1;min-width:70px;padding:10px;border-radius:99px;border:1px solid var(--bd);background:var(--cd);color:var(--tx);font-size:.9rem;cursor:pointer}
+.ch button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.hero{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border-radius:18px;padding:18px;text-align:center;margin-bottom:12px}
+.hero b{font-size:2.4rem;display:block}.hero span{opacity:.9}
+.rs{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:6px 16px;margin-bottom:12px}
+.rs div{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--bd);font-size:.92rem}
+.rs div:last-child{border:0}.rs span{color:var(--mu)}.rs b{text-align:right}
+.btn{width:100%;padding:14px;border:0;border-radius:12px;background:var(--ac);color:#fff;font-size:1rem;font-weight:600;cursor:pointer}
+.er{color:var(--er);padding:10px 0}.nt{font-size:.78rem;color:var(--mu);margin:8px 0}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--cd);border-top:1px solid var(--bd);display:flex;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;padding:14px 4px;border:0;background:none;color:var(--mu);font-size:.85rem;cursor:pointer}
+nav button.on{color:var(--ac);font-weight:700}
+#rc{display:none}.tb{width:100%;border-collapse:collapse;background:var(--cd);border:1px solid var(--bd);border-radius:12px;margin-bottom:12px;font-size:.9rem}.tb th{color:var(--mu);font-weight:500;font-size:.75rem;padding:8px 4px}.tb td{padding:9px 4px;border-top:1px solid var(--bd);text-align:center}.tb td:first-child{text-align:left;padding-left:10px;color:var(--mu)}.tb tr.k td{font-weight:700;color:var(--tx)}
+@media print{@page{margin:0}body *{visibility:hidden}#rc,#rc *{visibility:visible}#rc{display:block;position:absolute;left:0;top:0;color:#000;background:#fff;font:12px monospace;padding:4px 6px}#rc hr{border:0;border-top:1px dashed #000}#rc td{padding:1px 0}}
+#gate{position:fixed;inset:0;z-index:50;background:var(--bg);display:none;align-items:center;justify-content:center;padding:20px}#gate .bx{width:100%;max-width:380px}
+header{max-width:none;margin:0 0 16px;padding:18px 18px 22px;background:linear-gradient(135deg,#5c3d04,#b8860b 60%,#e6b832);color:#fff;border-radius:0 0 24px 24px;box-shadow:0 6px 18px rgba(120,80,0,.25)}
+header h1{color:#fff;font-size:1.35rem;letter-spacing:.5px}header small{color:#ffe9a6}header img{background:#fff;padding:3px;border-radius:10px}
+.st{border-left:5px solid var(--ac2);box-shadow:0 2px 8px rgba(120,80,0,.08)}.n{background:linear-gradient(135deg,#b8860b,#e6b832)}
+.btn{background:linear-gradient(135deg,#9a6b08,#d4a017);box-shadow:0 3px 10px rgba(150,100,0,.3)}
+.hero{background:linear-gradient(135deg,#4a3003,#a67608 55%,#e6b832);box-shadow:0 6px 16px rgba(120,80,0,.3)}
+.rs,.tb{box-shadow:0 2px 8px rgba(120,80,0,.08)}.tb th{background:#f3e6b8;color:#5c3d04}
+.ch button.on{background:linear-gradient(135deg,#9a6b08,#d4a017);border-color:#b8860b}
+nav{background:#2e2208;border-top:0}nav button{color:#cdb67a}nav button.on{color:#ffd45c}
+</style></head><body>
+<header><img id="hl" alt="" style="display:none"><div><h1 id="hn">Gold Lab</h1><small id="hs"></small></div></header>
+<main>
+<section class="pg on" id="p-lab">
+<div class="st"><div class="n">1</div><div><label>Weight in Air (g)</label><input id="wa" type="number" step="0.001" inputmode="decimal" placeholder="0.000"></div></div>
+<div class="st"><div class="n">2</div><div><label>Weight in Water (g)</label><input id="ww" type="number" step="0.001" inputmode="decimal" placeholder="0.000"></div></div>
+<div class="st"><div class="n">3</div><div><label>Rate per Tola (Rs)</label><input id="rt" type="number" inputmode="numeric" placeholder="0"></div></div>
+<div class="ch" id="chl"></div><div class="g2"><div class="f"><label>Lab charge (Rs)</label><input id="lc" type="number" inputmode="numeric"></div><div class="f"><label>Charge per gram (Rs)</label><input id="pc" type="number" inputmode="numeric"></div></div>
+<div id="lo"></div>
+</section>
+<section class="pg" id="p-kaat">
+<p class="nt">Manual kaat: you decide how much kaat per tola. Weight is in grams, kaat in Aana and Ratti per tola.</p>
+<div class="st"><div class="n">1</div><div><label>Weight (g)</label><input id="kw" type="number" step="0.001" inputmode="decimal" placeholder="0.000"></div></div>
+<div class="st"><div class="n">2</div><div><label>Rate per Tola (Rs)</label><input id="kr" type="number" inputmode="numeric" placeholder="0"></div></div>
+<div class="st"><div class="n">3</div><div style="flex:1"><label>Kaat per Tola</label><div class="g2"><input id="ka" type="number" inputmode="decimal" placeholder="Aana"><input id="kt" type="number" inputmode="decimal" placeholder="Ratti"></div></div></div>
+<div id="ko"></div>
+</section>
+<section class="pg" id="p-rec"><div class="f"><input id="r-q" placeholder="Search customer name"></div><button class="btn" id="r-sync" style="background:var(--mu);margin-bottom:8px">Sync with server</button><div class="g2" style="margin-bottom:8px"><button class="btn" id="r-ex" style="background:var(--mu)">Backup (JSON)</button><button class="btn" id="r-cv" style="background:var(--mu)">Export CSV</button></div><div class="f"><label>Restore from backup file</label><input id="r-im" type="file" accept=".json"></div><p class="nt" id="r-msg"></p><div id="r-l"></div></section>
+<section class="pg" id="p-set">
+<div class="f"><label>Shop name</label><input id="s-shop"></div>
+<div class="f"><label>Address</label><input id="s-addr"></div>
+<div class="f"><label>Phone</label><input id="s-ph"></div>
+<div class="f"><label>Logo (image)</label><input id="s-logo" type="file" accept="image/*"><button class="btn" id="s-lx" style="margin-top:6px;background:var(--mu)">Remove logo</button></div>
+<div class="f"><label>Slip footer text</label><input id="s-foot"></div>
+<div class="g2"><div class="f"><label>Slip width</label><select id="s-pw"><option>58mm</option><option>80mm</option></select></div>
+<div class="f"><label>Default rate per tola (Rs)</label><input id="s-rate" type="number"></div></div><div class="f"><label>Print method</label><select id="s-pm"><option value="bt">Direct Bluetooth (BLE printer)</option><option value="rawbt">RawBT app (classic Bluetooth)</option><option value="browser">Browser print dialog</option></select></div>
+<div class="g2"><div class="f"><label>Water temperature</label><select id="s-tm"><option value="off">Ignore (1.000)</option><option value="on">Use correction</option></select></div>
+<div class="f"><label>Temperature (°C)</label><input id="s-t" type="number" step="0.5"></div></div>
+<button class="btn" id="lo-btn" style="background:var(--mu);margin-bottom:12px;display:none">Log out</button>
+<p class="nt">Alloy densities (g/cm³), editable:</p>
+<div class="g2"><div class="f"><label>Silver</label><input id="s-rs" type="number" step="0.01"></div><div class="f"><label>Copper</label><input id="s-rc" type="number" step="0.01"></div>
+<div class="f"><label>Standard</label><input id="s-st" type="number" step="0.01"></div><div class="f"><label>P_Silver</label><input id="s-ps" type="number" step="0.01"></div><div class="f"><label>Mix540</label><input id="s-mx" type="number" step="0.01"></div><div class="f"><label>Standard 1</label><input id="s-s1" type="number" step="0.001"></div><div class="f"><label>Standard 2</label><input id="s-s2" type="number" step="0.001"></div><div class="f"><label>Local 1</label><input id="s-l1" type="number" step="0.001"></div><div class="f"><label>False Gold</label><input id="s-fg" type="number" step="0.001"></div></div>
+<p class="nt"><b>Calibrate from your old software:</b> pick a type, enter the same air and water weights and the Ratti IN your old software shows. The density is worked out and filled in above. Then press Save Settings.</p>
+<div class="g2"><div class="f"><label>Type</label><select id="c-t"></select></div><div class="f"><label>Ratti IN (old software)</label><input id="c-r" type="number" step="0.01"></div><div class="f"><label>Air (g)</label><input id="c-a" type="number" step="0.001"></div><div class="f"><label>Water (g)</label><input id="c-w" type="number" step="0.001"></div></div><button class="btn" id="c-go" style="background:var(--mu);margin-bottom:6px">Calibrate</button><p class="nt" id="c-msg"></p>
+<div class="f"><label>Next token number</label><input id="s-tok" type="number"></div>
+<button class="btn" id="s-save">Save Settings</button><p class="nt" id="s-msg"></p>
+</section>
+</main>
+<div id="rc"></div>
+<div id="ts" style="position:fixed;left:12px;right:12px;bottom:84px;z-index:60;background:#2e2208;color:#fff;padding:10px 14px;border-radius:12px;display:none"></div>
+<div id="md" style="display:none;position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.55);overflow:auto;padding:14px"><div style="max-width:440px;margin:0 auto;background:var(--cd);border-radius:16px;padding:14px"><img id="md-i" alt="" style="width:100%;border:1px solid var(--bd);border-radius:8px;background:#fff"><p class="nt" id="md-n"></p><div class="f" style="margin-top:10px"><label>Customer name</label><input id="md-c"></div><div class="g2"><button class="btn" id="md-s">Save name</button><button class="btn" id="md-p">Print again</button><button class="btn" id="md-o" style="background:var(--mu)">Open in Lab</button><button class="btn" id="md-d" style="background:var(--er)">Delete</button></div><button class="btn" id="md-x" style="background:none;color:var(--mu);box-shadow:none">Close</button></div></div>
+<div id="gate"><div class="bx"><h1 style="color:var(--ac);text-align:center">Gold Lab</h1><div class="f"><label>Username</label><input id="g-u" autocomplete="username"></div><div class="f"><label>Password</label><input id="g-p" type="password" autocomplete="current-password"></div><div class="f" id="g-cw" style="display:none"><label>Invite code</label><input id="g-code"></div><button class="btn" id="g-go">Log in</button><p class="nt" id="g-m"></p><p class="nt" id="g-sw" style="text-align:center;cursor:pointer;color:var(--ac)">Have an invite? Register</p></div></div>
+<nav><button class="on" data-p="lab">Lab</button><button data-p="kaat">Kaat</button><button data-p="rec">Records</button><button data-p="set">Settings</button></nav>
+<script>
+var $=function(i){return document.getElementById(i)},RG=19.32,TG=11.664;
+var WT=[[10,.9997],[15,.9991],[20,.99821],[25,.99705],[30,.99565],[35,.99403],[40,.99222]];
+// ===== PUT YOUR SERVER URL HERE (example: https://goldlab-api.onrender.com). Leave empty for offline mode. =====
+var SERVER="";
+var D={shop:"Gold Lab",addr:"",ph:"",logo:"",foot:"Estimate only (density method)",pw:"80mm",rate:"",tm:"off",t:30,rs:10.49,rc:8.96,st:8.96,ps:10.09,mx:9.98,s1:8.96,s2:9.66,l1:9.98,fg:8.5,pm:"bt"},S={},tok=0,al="st";
+try{S=JSON.parse(localStorage.getItem("gl_s")||"{}");tok=+localStorage.getItem("gl_k")||0}catch(e){}
+for(var k in D)if(S[k]===undefined)S[k]=D[k];
+var AL={st:"Standard",rs:"Silver",rc:"Copper",ps:"P_Silver",mx:"Mix540",s1:"Standard 1",s2:"Standard 2",l1:"Local 1",fg:"False Gold"};
+function wd(t){t=Math.max(10,Math.min(40,t));for(var i=0;i<6;i++){var a=WT[i],b=WT[i+1];if(t<=b[0])return a[1]+(b[1]-a[1])*(t-a[0])/(b[0]-a[0])}return .99222}
+function tarN(g){var r=Math.round(g/TG*96*100)/100,t=Math.floor(r/96);r-=t*96;var a=Math.floor(r/6);r=Math.round((r-a*6)*100)/100;if(r>=6){a++;r=0}return[t,a,r.toFixed(2)]}
+function tar(g){var q=tarN(g);return q[0]+"T "+q[1]+"A "+q[2]+"R"}
+function fm(n){return"Rs "+Math.round(n).toLocaleString("en-PK")}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function head(){$("hn").textContent=S.shop||"Gold Lab";$("hs").textContent=[S.addr,S.ph].filter(Boolean).join(" · ");var l=$("hl");l.style.display=S.logo?"block":"none";l.src=S.logo||"";LOGO=null;if(S.logo){LOGO=new Image();LOGO.src=S.logo}}
+function show(el,rows,hero,title,cu){
+var h=hero?'<div class="hero"><b>'+hero[0]+'</b><span>'+hero[1]+'</span></div>':"";
+el.innerHTML=h+'<div class="rs">'+rows.map(function(r){return"<div><span>"+r[0]+"</span><b>"+r[1]+"</b></div>"}).join("")+'</div><button class="btn" id="pb">Print Slip</button>';
+$("pb").onclick=function(){slip(title,rows,cu?cu.value:"")}}
+var LOGO=null,BT=null,tt=0;
+function toast(t){var e=$("ts");e.textContent=t;e.style.display="block";clearTimeout(tt);tt=setTimeout(function(){e.style.display="none"},5000)}
+function drawSlip(d){var W=S.pw==="58mm"?384:576,k=W/384,c=document.createElement("canvas");c.width=W;c.height=Math.round(2000*k);var x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,W,c.height);x.fillStyle=x.strokeStyle="#000";x.textBaseline="middle";
+var m=12*k,iw=W-2*m,y=m+4*k,i;
+function T(t,px,xx,yy,al,b,mw){x.font=(b?"bold ":"")+px*k+"px sans-serif";x.textAlign=al;x.fillText(t,xx,yy,mw)}
+function B(y1,h,w){x.lineWidth=(w||2)*k;x.strokeRect(m,y1,iw,h)}
+if(LOGO&&LOGO.complete&&LOGO.naturalWidth){var lh=54*k,lw=LOGO.naturalWidth*lh/LOGO.naturalHeight;if(lw>iw*.6){lw=iw*.6;lh=lw*LOGO.naturalHeight/LOGO.naturalWidth}x.drawImage(LOGO,(W-lw)/2,y,lw,lh);y+=lh+4*k}
+y+=14*k;T(d.shop||"",26,W/2,y,"center",1,iw);y+=24*k;
+if(d.addr){T(d.addr,15,W/2,y,"center",0,iw);y+=19*k}
+if(d.ph){T(d.ph,15,W/2,y,"center",1,iw);y+=19*k}
+y+=6*k;x.fillRect(m,y,iw,30*k);x.fillStyle="#fff";T(d.title,19,W/2,y+16*k,"center",1);x.fillStyle="#000";y+=30*k;
+B(y,28*k);x.beginPath();x.moveTo(W*.38,y);x.lineTo(W*.38,y+28*k);x.stroke();
+T("#"+d.tok,17,(m+W*.38)/2,y+15*k,"center",1);T(d.date,14,(W*.38+W-m)/2,y+15*k,"center",0,W*.62-m-8*k);y+=28*k;
+if(d.cust){B(y,28*k);T("Customer: "+d.cust,16,m+6*k,y+15*k,"left",1,iw-12*k);y+=28*k}
+y+=10*k;
+if(d.big){B(y,66*k,4);B(y+5*k,56*k,1.5);T(d.big[0],14,W/2,y+17*k,"center",0);T(d.big[1],34,W/2,y+43*k,"center",1,iw-20*k);y+=66*k;if(d.sub){T(d.sub,14,W/2,y+14*k,"center",0,iw);y+=26*k}y+=8*k}
+if(d.cols){var fr=[.3,.14,.15,.15,.26],xs=[m],rh=28*k;fr.forEach(function(f,n){xs.push(xs[n]+f*iw)});
+var row=function(r,hd,bd){if(hd){x.fillRect(m,y,iw,rh);x.fillStyle="#fff"}r.forEach(function(v,n){var cx=xs[n],cw=xs[n+1]-cx;T(String(v),n?15:13,n?cx+cw/2:cx+4*k,y+rh/2,n?"center":"left",hd||bd||!n,cw-6*k)});x.fillStyle="#000";x.lineWidth=1.5*k;for(i=0;i<5;i++)x.strokeRect(xs[i],y,xs[i+1]-xs[i],rh);y+=rh};
+row(d.cols,1);d.rows.forEach(function(r,n){row(r,0,n===d.rows.length-1)});y+=10*k}
+d.kv.forEach(function(r){var h=30*k;if(r[2]){x.fillRect(m,y,iw,h);x.fillStyle="#fff"}T(r[0],15,m+6*k,y+h/2,"left",1,iw*.5-10*k);T(String(r[1]),16,m+iw*.75,y+h/2,"center",1,iw*.5-8*k);x.fillStyle="#000";B(y,h,1.5);x.beginPath();x.moveTo(m+iw*.5,y);x.lineTo(m+iw*.5,y+h);x.stroke();y+=h});
+y+=12*k;x.setLineDash([8*k,5*k]);x.lineWidth=2*k;x.beginPath();x.moveTo(m,y);x.lineTo(W-m,y);x.stroke();x.setLineDash([]);y+=18*k;T(d.foot||"",13,W/2,y,"center",0,iw);y+=20*k;T("* Thank you *",15,W/2,y,"center",1);y+=26*k;
+var o=document.createElement("canvas");o.width=W;o.height=Math.round(y+8*k);var q=o.getContext("2d");q.fillStyle="#fff";q.fillRect(0,0,W,o.height);q.drawImage(c,0,0);q.strokeStyle="#000";q.lineWidth=3*k;q.strokeRect(2*k,2*k,W-4*k,o.height-4*k);q.lineWidth=k;q.strokeRect(5.5*k,5.5*k,W-11*k,o.height-11*k);return o}
+function rasterize(c){var w=c.width,h=c.height,p=c.getContext("2d").getImageData(0,0,w,h).data,bw=w/8,o=[27,64];
+for(var y0=0;y0<h;y0+=96){var hh=Math.min(96,h-y0);o.push(29,118,48,0,bw&255,bw>>8,hh&255,hh>>8);for(var y=y0;y<y0+hh;y++)for(var b=0;b<bw;b++){var v=0;for(var i=0;i<8;i++){var j=(y*w+b*8+i)*4;if(p[j]*.3+p[j+1]*.59+p[j+2]*.11<140)v|=128>>i}o.push(v)}}
+o.push(27,100,4);return new Uint8Array(o)}
+var SV=["000018f0-0000-1000-8000-00805f9b34fb","0000ff00-0000-1000-8000-00805f9b34fb","0000ffe0-0000-1000-8000-00805f9b34fb","0000fff0-0000-1000-8000-00805f9b34fb","e7810a71-73ae-499d-8c15-faa9aef0c3f2","49535343-fe7d-4ae5-8fa9-9fafd205e455"];
+async function btCh(){if(BT&&BT.dev.gatt.connected)return BT.ch;var dev=BT?BT.dev:await navigator.bluetooth.requestDevice({acceptAllDevices:true,optionalServices:SV}),srv=await dev.gatt.connect(),ss=await srv.getPrimaryServices(),ch=null;
+for(var s of ss){var cs=await s.getCharacteristics();for(var c of cs)if(c.properties.writeWithoutResponse||c.properties.write){ch=c;break}if(ch)break}
+if(!ch)throw new Error("printer has no BLE write channel");BT={dev:dev,ch:ch};return ch}
+async function btSend(b){var ch=await btCh(),n=180,i=0,f=ch.properties.writeWithoutResponse?"writeValueWithoutResponse":"writeValue";
+while(i<b.length){try{await ch[f](b.slice(i,i+n));i+=n;await new Promise(function(r){setTimeout(r,12)})}catch(e){if(n>100)n=100;else if(n>20)n=20;else throw e}}}
+async function out(d){var c=drawSlip(d);
+if(S.pm==="bt"&&navigator.bluetooth){try{toast("Printing...");await btSend(rasterize(c));toast("Printed.");return}catch(e){toast("Bluetooth print failed ("+(e.message||e)+"). Using normal print.")}}
+if(S.pm==="rawbt"){var u=rasterize(c),s="";for(var i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));location.href="rawbt:base64,"+btoa(s);return}
+$("rc").innerHTML='<img style="width:100%" src="'+c.toDataURL("image/png")+'">';setTimeout(function(){window.print()},200)}
+function slip(d,rec){tok++;try{localStorage.setItem("gl_k",tok)}catch(e){}$("s-tok").value=tok+1;var n=new Date();d.tok=tok;d.date=n.toLocaleDateString("en-GB")+" "+n.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});d.shop=S.shop;d.addr=S.addr;d.ph=S.ph;d.foot=S.foot;if(rec){rec.slip=d;saveRec(rec,d.cust)}out(d)}
+var REC=[];try{REC=JSON.parse(localStorage.getItem("gl_rec")||"[]")}catch(e){}
+function persist(){try{localStorage.setItem("gl_rec",JSON.stringify(REC.slice(0,3000)))}catch(e){}}
+function api(){return SERVER.replace(/\/$/,"")+"/records"}
+function post(r){if(!SERVER||!JWT)return Promise.resolve(false);var c=Object.assign({},r);delete c.sent;delete c.slip;return fetch(api(),{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+JWT},body:JSON.stringify(c)}).then(function(x){if(x.status===401)logout();return x.ok}).catch(function(){return false})}
+function saveRec(rec,cu){rec.token=tok;rec.customer=cu||"";rec.shop=S.shop;rec.date=new Date().toISOString();rec.sent=false;REC.unshift(rec);persist();drawRec();post(rec).then(function(ok){if(ok){rec.sent=true;persist();drawRec()}})}
+function drawRec(){var q=($("r-q").value||"").toLowerCase(),h="";REC.forEach(function(r,i){if(q&&(r.customer||"").toLowerCase(
